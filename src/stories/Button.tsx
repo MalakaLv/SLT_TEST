@@ -1,37 +1,50 @@
-import React from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import './button.css';
 
-export interface ButtonProps {
-  /** Is this the principal call to action on the page? */
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Legacy alias for the primary variant */
   primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
+  /** Visual style of the button */
+  variant?: 'primary' | 'secondary' | 'ghost';
+  /** Button height and padding */
   size?: 'small' | 'medium' | 'large';
+  /** Stretches button to parent width */
+  fullWidth?: boolean;
+  /** Optional legacy label prop for existing stories/components */
+  label?: string;
   /** Button contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
+  children?: ReactNode;
 }
 
-/** Primary UI component for user interaction */
 export const Button = ({
   primary = false,
+  variant = 'primary',
   size = 'medium',
-  backgroundColor,
+  fullWidth = false,
   label,
+  children,
+  className,
+  type = 'button',
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const resolvedVariant = primary ? 'primary' : variant;
+
   return (
     <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
+      type={type}
+      className={[
+        'storybook-button',
+        `storybook-button--${resolvedVariant}`,
+        `storybook-button--${size}`,
+        fullWidth ? 'storybook-button--full-width' : '',
+        className ?? '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       {...props}
     >
-      {label}
+      <span className="storybook-button__label">{children ?? label}</span>
     </button>
   );
 };

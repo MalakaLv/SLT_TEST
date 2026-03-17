@@ -1,30 +1,105 @@
 .storybook-button {
-  display: inline-block;
+  --button-bg: #0066ff;
+  --button-bg-hover: #0052cc;
+  --button-text: #ffffff;
+  --button-border: transparent;
+  --button-shadow: 0 10px 24px rgba(0, 102, 255, 0.18);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 120px;
+  border: 1px solid var(--button-border);
+  border-radius: 12px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: var(--button-shadow);
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 600;
   line-height: 1;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+  text-align: center;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
 }
+
+.storybook-button:hover {
+  background: var(--button-bg-hover);
+  transform: translateY(-1px);
+}
+
+.storybook-button:focus-visible {
+  outline: 3px solid rgba(0, 102, 255, 0.22);
+  outline-offset: 2px;
+}
+
+.storybook-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.storybook-button:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.storybook-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .storybook-button--primary {
-  background-color: #555ab9;
-  color: white;
+  --button-bg: #0066ff;
+  --button-bg-hover: #0052cc;
+  --button-text: #ffffff;
+  --button-border: transparent;
+  --button-shadow: 0 10px 24px rgba(0, 102, 255, 0.18);
 }
+
 .storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
+  --button-bg: #ffffff;
+  --button-bg-hover: #f5f9ff;
+  --button-text: #0f172a;
+  --button-border: #bfd3ff;
+  --button-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
 }
+
+.storybook-button--ghost {
+  --button-bg: transparent;
+  --button-bg-hover: rgba(0, 102, 255, 0.08);
+  --button-text: #0066ff;
+  --button-border: transparent;
+  --button-shadow: none;
+}
+
 .storybook-button--small {
+  min-height: 36px;
   padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
   font-size: 14px;
 }
+
+.storybook-button--medium {
+  min-height: 44px;
+  padding: 12px 20px;
+  font-size: 15px;
+}
+
 .storybook-button--large {
-  padding: 12px 24px;
+  min-height: 52px;
+  padding: 14px 24px;
   font-size: 16px;
+}
+
+.storybook-button--full-width {
+  width: 100%;
 }
