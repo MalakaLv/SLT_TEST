@@ -1,0 +1,150 @@
+.input-field {
+  width: 252px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  cursor: text;
+}
+
+.input-field__body {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  padding: 0 8px 0 16px;
+  background: #ffffff;
+  border: 1px solid transparent;
+  pointer-events: auto;
+}
+
+.input-field--h48 .input-field__body {
+  height: 48px;
+}
+
+.input-field--h60 .input-field__body {
+  height: 60px;
+}
+
+.input-field__base {
+  flex: 1 1 auto;
+  min-width: 0;
+  pointer-events: auto;
+}
+
+.input-field__status {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.input-field__clear-btn {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.input-field__clear-btn--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input-field__status-svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.input-field__status-svg circle,
+.input-field__status-svg path {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.input-field__error-text {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.input-field--light.input-field--default .input-field__body,
+.input-field--light.input-field--filled .input-field__body {
+  border-color: #b7b7b7;
+}
+
+.input-field--dark.input-field--default .input-field__body,
+.input-field--dark.input-field--filled .input-field__body {
+  border-color: transparent;
+}
+
+.input-field--hover .input-field__body {
+  background: #fffcf9;
+  border-color: #dbb685;
+}
+
+.input-field--focused .input-field__body {
+  border-width: 2px;
+  border-color: var(--slt-black);
+  box-sizing: border-box;
+  padding: 0 7px 0 15px;
+}
+
+.input-field--light.input-field--error .input-field__body {
+  background: #ffe8e8;
+  border-color: #c80b0b;
+}
+
+.input-field--dark.input-field--error .input-field__body {
+  background: #ffe8e8;
+  border-width: 2px;
+  border-color: #ff7c7d;
+}
+
+.input-field--light.input-field--disabled .input-field__body {
+  background: #eeeeee;
+  border-color: #d7d7d7;
+}
+
+.input-field--dark.input-field--disabled .input-field__body {
+  background: #eeeeee;
+  border-color: transparent;
+}
+
+.input-field--focused .input-field__status-svg circle,
+.input-field--focused .input-field__status-svg path {
+  stroke: #a0a0a0;
+}
+
+.input-field--light.input-field--error .input-field__status-svg circle,
+.input-field--light.input-field--error .input-field__status-svg path,
+.input-field--light.input-field--error .input-field__error-text {
+  stroke: #c80b0b;
+  color: #c80b0b;
+}
+
+.input-field--dark.input-field--error .input-field__status-svg circle,
+.input-field--dark.input-field--error .input-field__status-svg path,
+.input-field--dark.input-field--error .input-field__error-text {
+  stroke: #ff7c7d;
+  color: #ff7c7d;
+}

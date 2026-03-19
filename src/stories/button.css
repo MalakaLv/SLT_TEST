@@ -1,55 +1,35 @@
 .storybook-button {
-  --button-bg: #0066ff;
-  --button-bg-hover: #0052cc;
-  --button-text: #ffffff;
-  --button-border: transparent;
-  --button-shadow: 0 10px 24px rgba(0, 102, 255, 0.18);
+  --button-bg: #dbb685;
+  --button-color: var(--slt-black);
+  --button-border-color: transparent;
+  --button-border-width: 0;
+  --button-focus-ring: 0 0 0 4px rgba(219, 182, 133, 0.25);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-width: 120px;
-  border: 1px solid var(--button-border);
-  border-radius: 12px;
+  padding: 16px 20px;
+  min-height: 56px;
+  min-width: 148px;
+  border: var(--button-border-width) solid var(--button-border-color);
+  border-radius: 0;
   background: var(--button-bg);
-  color: var(--button-text);
-  box-shadow: var(--button-shadow);
+  color: var(--button-color);
+  box-shadow: none;
   cursor: pointer;
   font-family: Inter, 'Segoe UI', Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0;
   text-align: center;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
-    box-shadow 160ms ease,
     color 160ms ease,
-    transform 160ms ease;
-}
-
-.storybook-button:hover {
-  background: var(--button-bg-hover);
-  transform: translateY(-1px);
-}
-
-.storybook-button:focus-visible {
-  outline: 3px solid rgba(0, 102, 255, 0.22);
-  outline-offset: 2px;
-}
-
-.storybook-button:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.storybook-button:disabled {
-  opacity: 0.52;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+    box-shadow 160ms ease;
 }
 
 .storybook-button__label {
@@ -58,46 +38,169 @@
   white-space: nowrap;
 }
 
+.storybook-button__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.storybook-button__icon::before,
+.storybook-button__icon::after {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  background: currentcolor;
+  transform: translate(-50%, -50%);
+}
+
+.storybook-button__icon::before {
+  width: 14px;
+  height: 1.8px;
+}
+
+.storybook-button__icon::after {
+  width: 1.8px;
+  height: 14px;
+}
+
 .storybook-button--primary {
-  --button-bg: #0066ff;
-  --button-bg-hover: #0052cc;
-  --button-text: #ffffff;
-  --button-border: transparent;
-  --button-shadow: 0 10px 24px rgba(0, 102, 255, 0.18);
+  --button-color: var(--slt-black);
 }
 
 .storybook-button--secondary {
+  --button-color: #ffffff;
+}
+
+.storybook-button--stroke {
+  --button-color: var(--slt-black);
+  --button-border-width: 1px;
+}
+
+.storybook-button--default.storybook-button--primary {
+  --button-bg: #dbb685;
+}
+
+.storybook-button--hovered.storybook-button--primary {
+  --button-bg: #e8c290;
+}
+
+.storybook-button--pressed.storybook-button--primary {
+  --button-bg: #cba472;
+}
+
+.storybook-button--focused.storybook-button--primary {
+  --button-bg: #e8c290;
+  box-shadow: var(--button-focus-ring);
+}
+
+.storybook-button--default.storybook-button--primary:hover {
+  --button-bg: #e8c290;
+}
+
+.storybook-button--default.storybook-button--primary:active {
+  --button-bg: #cba472;
+}
+
+.storybook-button--default.storybook-button--primary:focus-visible {
+  --button-bg: #e8c290;
+  box-shadow: var(--button-focus-ring);
+  outline: none;
+}
+
+.storybook-button--default.storybook-button--secondary {
+  --button-bg: #2b7373;
+}
+
+.storybook-button--hovered.storybook-button--secondary {
+  --button-bg: #389090;
+}
+
+.storybook-button--pressed.storybook-button--secondary {
+  --button-bg: #1e5656;
+}
+
+.storybook-button--focused.storybook-button--secondary {
+  --button-bg: #389090;
+  box-shadow: var(--button-focus-ring);
+}
+
+.storybook-button--default.storybook-button--secondary:hover {
+  --button-bg: #389090;
+}
+
+.storybook-button--default.storybook-button--secondary:active {
+  --button-bg: #1e5656;
+}
+
+.storybook-button--default.storybook-button--secondary:focus-visible {
+  --button-bg: #389090;
+  box-shadow: var(--button-focus-ring);
+  outline: none;
+}
+
+.storybook-button--default.storybook-button--stroke {
   --button-bg: #ffffff;
-  --button-bg-hover: #f5f9ff;
-  --button-text: #0f172a;
-  --button-border: #bfd3ff;
-  --button-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --button-border-color: var(--slt-black);
 }
 
-.storybook-button--ghost {
-  --button-bg: transparent;
-  --button-bg-hover: rgba(0, 102, 255, 0.08);
-  --button-text: #0066ff;
-  --button-border: transparent;
-  --button-shadow: none;
+.storybook-button--hovered.storybook-button--stroke {
+  --button-bg: #ffffff;
+  --button-border-color: #a0a0a0;
 }
 
-.storybook-button--small {
-  min-height: 36px;
-  padding: 10px 16px;
-  font-size: 14px;
+.storybook-button--pressed.storybook-button--stroke {
+  --button-bg: #f6f6f6;
+  --button-color: #a0a0a0;
+  --button-border-color: #a0a0a0;
 }
 
-.storybook-button--medium {
-  min-height: 44px;
-  padding: 12px 20px;
-  font-size: 15px;
+.storybook-button--focused.storybook-button--stroke {
+  --button-bg: #ffffff;
+  --button-border-color: #a0a0a0;
+  box-shadow: var(--button-focus-ring);
 }
 
-.storybook-button--large {
-  min-height: 52px;
-  padding: 14px 24px;
-  font-size: 16px;
+.storybook-button--default.storybook-button--stroke:hover {
+  --button-bg: #ffffff;
+  --button-border-color: #a0a0a0;
+}
+
+.storybook-button--default.storybook-button--stroke:active {
+  --button-bg: #f6f6f6;
+  --button-color: #a0a0a0;
+  --button-border-color: #a0a0a0;
+}
+
+.storybook-button--default.storybook-button--stroke:focus-visible {
+  --button-bg: #ffffff;
+  --button-border-color: #a0a0a0;
+  box-shadow: var(--button-focus-ring);
+  outline: none;
+}
+
+.storybook-button--disabled {
+  --button-bg: #eeeeee;
+  --button-color: #d7d7d7;
+  --button-border-width: 0;
+  --button-border-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.storybook-button--legacy-size-small {
+  min-height: 56px;
+  padding: 16px 20px;
+}
+
+.storybook-button--legacy-size-medium {
+  min-height: 56px;
+  padding: 16px 20px;
+}
+
+.storybook-button--legacy-size-large {
+  min-height: 56px;
+  padding: 16px 20px;
 }
 
 .storybook-button--full-width {

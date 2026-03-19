@@ -1,0 +1,134 @@
+.input-field-base {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+}
+
+.input-field-base__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 100%;
+  flex: 0 0 24px;
+  align-self: stretch;
+  margin-right: 8px;
+}
+
+.input-field-base__icon-svg path {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.input-field-base__icon--default .input-field-base__icon-svg path {
+  stroke: var(--slt-black);
+}
+
+.input-field-base__icon--active-empty .input-field-base__icon-svg path {
+  stroke: #767676;
+}
+
+.input-field-base__icon--disabled .input-field-base__icon-svg path {
+  stroke: #d7d7d7;
+}
+
+.input-field-base__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.input-field-base__label,
+.input-field-base__value {
+  margin: 0;
+  letter-spacing: 0;
+  font-style: normal;
+}
+
+.input-field-base__label--small {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.input-field-base__label--large {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.input-field-base__value {
+  margin-top: -4px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.input-field-base__value--semibold {
+  font-weight: 600;
+}
+
+.input-field-base--active .input-field-base__label--small,
+.input-field-base--hover .input-field-base__label--small,
+.input-field-base--action .input-field-base__label--small {
+  color: #767676;
+}
+
+.input-field-base--active.input-field-base--empty .input-field-base__label--large {
+  color: #767676;
+}
+
+.input-field-base--hover.input-field-base--empty .input-field-base__label--large {
+  color: var(--slt-black);
+}
+
+.input-field-base--disabled .input-field-base__label {
+  color: #d7d7d7;
+}
+
+.input-field-base__native-input {
+  display: block;
+  width: 100%;
+  height: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input-field-base--action .input-field-base__native-input,
+.input-field-base--filled .input-field-base__native-input,
+.input-field-base--semiBold .input-field-base__native-input {
+  height: 24px;
+  opacity: 1;
+  color: var(--slt-black);
+  caret-color: var(--slt-black);
+  pointer-events: auto;
+}
+
+.input-field-base__native-input--semibold {
+  font-weight: 600;
+}
+
+.input-field-base--disabled .input-field-base__native-input {
+  color: #d7d7d7;
+  caret-color: transparent;
+}

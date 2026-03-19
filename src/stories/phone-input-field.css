@@ -1,0 +1,221 @@
+.phone-input-field {
+  width: 252px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+}
+
+.phone-input-field__row {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+.phone-input-field__left-zone {
+  width: 65px;
+  flex: 0 0 65px;
+}
+
+.phone-input-field__country {
+  width: 65px;
+}
+
+.phone-input-field__country .country-selector {
+  width: 65px;
+}
+
+.phone-input-field__country .country-selector__trigger {
+  border-right: 0;
+}
+
+.phone-input-field__country .country-selector__separator {
+  width: 1px;
+  height: 26px;
+  background: #b7b7b7;
+  flex: 0 0 1px;
+  align-self: center;
+  opacity: 1;
+}
+
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__separator,
+.phone-input-field__row--hover-right .phone-input-field__country .country-selector__separator,
+.phone-input-field__row--focused-left .phone-input-field__country .country-selector__separator,
+.phone-input-field__row--focused-right .phone-input-field__country .country-selector__separator {
+  display: none;
+}
+
+.phone-input-field__country .country-selector__menu {
+  left: 0;
+  top: 48px;
+}
+
+.phone-input-field__right-zone {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border: 1px solid #b7b7b7;
+  border-left: 0;
+  background: #ffffff;
+}
+
+.phone-input-field__right-zone--hover {
+  border-color: #dbb685;
+  background: #fffcf9;
+}
+
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger {
+  border: 1px solid #dbb685;
+  background: #fffcf9;
+}
+
+.phone-input-field__row--hover-left .phone-input-field__right-zone {
+  border-left: 0;
+}
+
+.phone-input-field__row--hover-right .phone-input-field__right-zone {
+  border: 1px solid #dbb685;
+  background: #fffcf9;
+}
+
+.phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger {
+  border: 2px solid var(--slt-black);
+  background: #ffffff;
+}
+
+.phone-input-field__row--focused-left .phone-input-field__right-zone {
+  border: 1px solid #b7b7b7;
+  border-left: 0;
+  background: #ffffff;
+}
+
+.phone-input-field__row--focused-right .phone-input-field__country .country-selector__trigger {
+  border: 1px solid #b7b7b7;
+  border-right: 0;
+  background: #ffffff;
+}
+
+.phone-input-field__right-zone--focused {
+  border-width: 2px;
+  border-color: var(--slt-black);
+  padding: 0 7px;
+}
+
+.phone-input-field__right-zone--error {
+  background: #ffe8e8;
+}
+
+.phone-input-field--light .phone-input-field__right-zone--error {
+  border-color: #c80b0b;
+}
+
+.phone-input-field--dark .phone-input-field__right-zone--error {
+  border-width: 2px;
+  border-color: #ff7c7d;
+}
+
+.phone-input-field__right-zone--disabled {
+  background: #eeeeee;
+  border-color: #d7d7d7;
+}
+
+.phone-input-field__text-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phone-input-field__label {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #767676;
+}
+
+.phone-input-field__label--small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.phone-input-field__native-input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--slt-black);
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.phone-input-field__native-input--hidden {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+}
+
+.phone-input-field__status {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-input-field__status-svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.phone-input-field__status-svg circle,
+.phone-input-field__status-svg path {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.phone-input-field__right-zone--default .phone-input-field__status-svg,
+.phone-input-field__right-zone--hover .phone-input-field__status-svg,
+.phone-input-field__right-zone--focused .phone-input-field__status-svg {
+  stroke: #a0a0a0;
+}
+
+.phone-input-field--light .phone-input-field__right-zone--error .phone-input-field__status-svg {
+  stroke: #c80b0b;
+}
+
+.phone-input-field--dark .phone-input-field__right-zone--error .phone-input-field__status-svg {
+  stroke: #ff7c7d;
+}
+
+.phone-input-field__status-svg--success {
+  stroke: #6fad57;
+}
+
+.phone-input-field__error-text {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.phone-input-field--light .phone-input-field__error-text {
+  color: #c80b0b;
+}
+
+.phone-input-field--dark .phone-input-field__error-text {
+  color: #ff7c7d;
+}

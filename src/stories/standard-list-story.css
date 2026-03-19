@@ -1,0 +1,24 @@
+.standard-list-story {
+  position: relative;
+}
+
+.standard-list-story__hidden-trigger {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.standard-list-story__menu {
+  position: static;
+  width: 236px;
+}
+
+.standard-list-story--country .standard-list-story__menu {
+  width: 320px;
+}
+
+.standard-list-story__search-wrap {
+  margin-bottom: 8px;
+}

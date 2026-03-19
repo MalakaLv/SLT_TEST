@@ -1,0 +1,38 @@
+.standard-list {
+  position: relative;
+}
+
+.standard-list__menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 20;
+}
+
+.standard-list__options {
+  display: flex;
+  flex-direction: column;
+}
+
+.standard-list__option {
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.standard-list__option--selected {
+  background: #f6f6f6;
+}
+
+.standard-list__option--active:not(.standard-list__option--selected) {
+  background: #f6f6f6;
+}
+
+.standard-list__search-input {
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}

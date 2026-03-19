@@ -1,0 +1,129 @@
+import type { Meta, StoryObj } from '@storybook/react-vite';
+
+import { InputField } from './InputField';
+
+const meta = {
+  title: 'Components/InputField',
+  component: InputField,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    state: {
+      control: 'inline-radio',
+      options: ['default', 'hover', 'focused', 'filled', 'error', 'disabled'],
+    },
+    theme: {
+      control: 'inline-radio',
+      options: ['light', 'dark'],
+    },
+    size: {
+      control: 'inline-radio',
+      options: [48, 60],
+    },
+  },
+  args: {
+    size: 48,
+    label: 'Label',
+    errorText: 'Please enter your email address',
+  },
+} satisfies Meta<typeof InputField>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const darkDecorator = (StoryComponent: () => React.JSX.Element) => (
+  <div style={{ padding: '24px', background: 'linear-gradient(90deg, #1f1f1f 0%, #2d2d2d 100%)' }}>
+    <StoryComponent />
+  </div>
+);
+
+export const DefaultLight: Story = {
+  args: {
+    theme: 'light',
+    state: 'default',
+  },
+};
+
+export const FocusedLight: Story = {
+  args: {
+    theme: 'light',
+    state: 'focused',
+  },
+};
+
+export const Focused: Story = {
+  args: {
+    theme: 'light',
+    state: 'focused',
+  },
+};
+
+export const Hovered: Story = {
+  args: {
+    theme: 'light',
+    state: 'hover',
+  },
+};
+
+export const FilledLight: Story = {
+  args: {
+    theme: 'light',
+    state: 'filled',
+  },
+};
+
+export const ErrorLight: Story = {
+  args: {
+    theme: 'light',
+    state: 'error',
+  },
+};
+
+export const DisabledLight: Story = {
+  args: {
+    theme: 'light',
+    state: 'disabled',
+  },
+};
+
+export const DefaultDark: Story = {
+  args: {
+    theme: 'dark',
+    state: 'default',
+  },
+  decorators: [darkDecorator],
+};
+
+export const FocusedDark: Story = {
+  args: {
+    theme: 'dark',
+    state: 'focused',
+  },
+  decorators: [darkDecorator],
+};
+
+export const FilledDark: Story = {
+  args: {
+    theme: 'dark',
+    state: 'filled',
+  },
+  decorators: [darkDecorator],
+};
+
+export const ErrorDark: Story = {
+  args: {
+    theme: 'dark',
+    state: 'error',
+  },
+  decorators: [darkDecorator],
+};
+
+export const DisabledDark: Story = {
+  args: {
+    theme: 'dark',
+    state: 'disabled',
+  },
+  decorators: [darkDecorator],
+};

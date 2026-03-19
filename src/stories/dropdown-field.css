@@ -1,0 +1,223 @@
+.dropdown-field {
+  position: relative;
+  width: 151px;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+}
+
+.dropdown-field__trigger {
+  width: 151px;
+  height: 38px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.dropdown-field__trigger:focus-visible {
+  outline: none;
+}
+
+.dropdown-field__value-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dropdown-field__icon-wrap {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px;
+}
+
+.dropdown-field__icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown-field__icon path {
+  fill: currentcolor;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dropdown-field__icon--check path,
+.dropdown-field__icon--chevron path {
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.dropdown-field__icon--user path {
+  stroke: none;
+}
+
+.dropdown-field__prefix,
+.dropdown-field__pipe,
+.dropdown-field__label {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.dropdown-field__pipe {
+  margin-right: 2px;
+}
+
+.dropdown-field__menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 236px;
+  box-sizing: border-box;
+  border: 1px solid #b7b7b7;
+  background: #ffffff;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.dropdown-field__option {
+  width: 100%;
+  height: 48px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-field__option-label {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--slt-black);
+}
+
+.dropdown-field__option-icon-wrap {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slt-black);
+}
+
+.dropdown-field__option--selected {
+  background: #f6f6f6;
+}
+
+.dropdown-field__option--active:not(.dropdown-field__option--selected) {
+  background: #f6f6f6;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--enabled {
+  background: #f6f6f6;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--hover {
+  background: #f6f6f6;
+  border-color: #dbb685;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--open {
+  background: #ffffff;
+  border-color: var(--slt-black);
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--disabled {
+  background: #eeeeee;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--enabled {
+  background: #3c3c3c;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--hover,
+.dropdown-field__trigger--dark.dropdown-field__trigger--open {
+  background: #3c3c3c;
+  border-color: #dbb685;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--disabled {
+  background: #eeeeee;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--enabled .dropdown-field__prefix,
+.dropdown-field__trigger--light.dropdown-field__trigger--enabled .dropdown-field__label,
+.dropdown-field__trigger--light.dropdown-field__trigger--enabled .dropdown-field__icon,
+.dropdown-field__trigger--light.dropdown-field__trigger--hover .dropdown-field__prefix,
+.dropdown-field__trigger--light.dropdown-field__trigger--hover .dropdown-field__label,
+.dropdown-field__trigger--light.dropdown-field__trigger--hover .dropdown-field__icon,
+.dropdown-field__trigger--light.dropdown-field__trigger--open .dropdown-field__prefix,
+.dropdown-field__trigger--light.dropdown-field__trigger--open .dropdown-field__label,
+.dropdown-field__trigger--light.dropdown-field__trigger--open .dropdown-field__icon {
+  color: var(--slt-black);
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--enabled .dropdown-field__pipe,
+.dropdown-field__trigger--light.dropdown-field__trigger--hover .dropdown-field__pipe {
+  color: #b7b7b7;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--open .dropdown-field__pipe {
+  color: var(--slt-black);
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--enabled .dropdown-field__prefix,
+.dropdown-field__trigger--dark.dropdown-field__trigger--enabled .dropdown-field__label,
+.dropdown-field__trigger--dark.dropdown-field__trigger--enabled .dropdown-field__icon {
+  color: #d7d7d7;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--enabled .dropdown-field__pipe {
+  color: #767676;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--hover .dropdown-field__prefix,
+.dropdown-field__trigger--dark.dropdown-field__trigger--hover .dropdown-field__label,
+.dropdown-field__trigger--dark.dropdown-field__trigger--hover .dropdown-field__icon,
+.dropdown-field__trigger--dark.dropdown-field__trigger--open .dropdown-field__prefix,
+.dropdown-field__trigger--dark.dropdown-field__trigger--open .dropdown-field__label,
+.dropdown-field__trigger--dark.dropdown-field__trigger--open .dropdown-field__icon,
+.dropdown-field__trigger--dark.dropdown-field__trigger--open .dropdown-field__pipe {
+  color: #ffffff;
+}
+
+.dropdown-field__trigger--dark.dropdown-field__trigger--hover .dropdown-field__pipe {
+  color: #767676;
+}
+
+.dropdown-field__trigger--light.dropdown-field__trigger--disabled .dropdown-field__prefix,
+.dropdown-field__trigger--light.dropdown-field__trigger--disabled .dropdown-field__pipe,
+.dropdown-field__trigger--light.dropdown-field__trigger--disabled .dropdown-field__label,
+.dropdown-field__trigger--light.dropdown-field__trigger--disabled .dropdown-field__icon,
+.dropdown-field__trigger--dark.dropdown-field__trigger--disabled .dropdown-field__prefix,
+.dropdown-field__trigger--dark.dropdown-field__trigger--disabled .dropdown-field__pipe,
+.dropdown-field__trigger--dark.dropdown-field__trigger--disabled .dropdown-field__label,
+.dropdown-field__trigger--dark.dropdown-field__trigger--disabled .dropdown-field__icon {
+  color: #d7d7d7;
+}
+
+.dropdown-field__trigger--disabled {
+  cursor: not-allowed;
+}
