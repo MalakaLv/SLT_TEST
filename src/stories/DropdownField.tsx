@@ -49,12 +49,12 @@ export const DropdownField = ({
   showIcons = true,
   className,
   initialOpen = false,
-  visualState = 'enabled',
+  visualState,
   ariaLabel = 'Trip type',
 }: DropdownFieldProps) => {
-  const standardVisualState: StandardListState = useMemo(() => {
-    if (visualState === 'enabled') {
-      return 'default';
+  const standardVisualState: StandardListState | undefined = useMemo(() => {
+    if (visualState === undefined || visualState === 'enabled') {
+      return undefined;
     }
     return visualState;
   }, [visualState]);
