@@ -129,6 +129,7 @@ export const StandardList = <T,>({
 
   const updateOpen = (nextOpen: boolean) => {
     if (!canInteractiveToggle) {
+      onOpenChange?.(nextOpen);
       return;
     }
     setOpen(nextOpen);
