@@ -35,11 +35,12 @@ const darkDecorator = (Story: () => React.JSX.Element) => (
     style={{
       background: '#272727',
       padding: '40px',
-      width: '100%',
-      minHeight: '200px',
+      width: '100vw',
+      minHeight: '300px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      margin: '-16px',
     }}
   >
     <Story />
