@@ -176,6 +176,8 @@ export const PhoneInputField = ({
           />
         </div>
 
+        <div className="phone-input-field__zone-divider" aria-hidden="true" />
+
         <div
           className={['phone-input-field__right-zone', `phone-input-field__right-zone--${rightState}`].join(' ')}
           onMouseEnter={() => {

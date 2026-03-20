@@ -27,23 +27,18 @@
 }
 
 .phone-input-field__country .country-selector__trigger {
-  border-right: 1px solid transparent;
+  border-right: 0;
 }
 
 .phone-input-field__country .country-selector__separator {
-  width: 1px;
-  height: 26px;
-  background: #b7b7b7;
-  flex: 0 0 1px;
-  align-self: center;
-  opacity: 1;
+  display: none;
 }
 
-.phone-input-field__row--hover-left .phone-input-field__country .country-selector__separator,
-.phone-input-field__row--hover-right .phone-input-field__country .country-selector__separator,
-.phone-input-field__row--focused-left .phone-input-field__country .country-selector__separator,
-.phone-input-field__row--focused-right .phone-input-field__country .country-selector__separator {
-  display: none;
+.phone-input-field__zone-divider {
+  width: 1px;
+  flex: 0 0 1px;
+  align-self: stretch;
+  background: #b7b7b7;
 }
 
 .phone-input-field__country .country-selector__menu {
@@ -55,14 +50,13 @@
   flex: 1 1 auto;
   min-width: 0;
   height: 48px;
-  margin-left: -1px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 0 8px;
   border: 1px solid #b7b7b7;
-  border-left: 1px solid transparent;
+  border-left: 0;
   background: #ffffff;
 }
 
@@ -76,13 +70,19 @@
   background: #fffcf9;
 }
 
-.phone-input-field__row--hover-left .phone-input-field__right-zone {
-  border-left: 0;
+.phone-input-field__row--hover-left .phone-input-field__zone-divider {
+  background: #dbb685;
 }
 
 .phone-input-field__row--hover-right .phone-input-field__right-zone {
   border: 1px solid #dbb685;
   background: #fffcf9;
+}
+
+.phone-input-field__row--hover-right .phone-input-field__zone-divider,
+.phone-input-field__row--focused-right .phone-input-field__zone-divider,
+.phone-input-field__row--focused-left .phone-input-field__zone-divider {
+  display: none;
 }
 
 .phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger {
