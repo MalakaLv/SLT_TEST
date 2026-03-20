@@ -1,0 +1,51 @@
+.request-forms {
+  width: min(100%, 760px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.request-forms__row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.request-forms__cell {
+  min-width: 0;
+}
+
+.request-forms__cell > * {
+  width: 100%;
+}
+
+.request-forms .dropdown-field,
+.request-forms .dropdown-field__trigger,
+.request-forms .input-field,
+.request-forms .phone-input-field {
+  width: 100%;
+}
+
+.request-forms__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .request-forms__row {
+    grid-template-columns: 1fr;
+  }
+
+  .request-forms__actions {
+    width: 100%;
+  }
+
+  .request-forms__actions .storybook-button {
+    width: 100%;
+  }
+}
