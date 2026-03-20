@@ -27,7 +27,7 @@
 }
 
 .phone-input-field__country .country-selector__trigger {
-  border-right: 0;
+  border-right: 1px solid transparent;
 }
 
 .phone-input-field__country .country-selector__separator {
