@@ -9,6 +9,18 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    tripTypeLabel: 'Trip Type',
+    passengersClassLabel: 'Passengers & Class',
+    fromLabel: 'From*',
+    toLabel: 'To*',
+    departureDateLabel: 'Departure Date',
+    returnDateLabel: 'Return Date',
+    phoneLabel: 'Phone number*',
+    emailLabel: 'E-mail*',
+    nameLabel: 'Name',
+    submitLabel: 'Get A Free Quotes',
+  },
 } satisfies Meta<typeof RequestForms>;
 
 export default meta;

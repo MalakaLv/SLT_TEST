@@ -8,18 +8,31 @@
 
 .request-forms__row {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
   gap: 16px;
   align-items: start;
 }
 
+.request-forms__row--single {
+  display: block;
+}
+
 .request-forms__cell {
+  flex: 1 1 0;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .request-forms__cell > * {
   width: 100%;
+}
+
+.request-forms__field-label {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #767676;
 }
 
 .request-forms .dropdown-field,
@@ -38,7 +51,7 @@
 
 @media (max-width: 720px) {
   .request-forms__row {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .request-forms__actions {
