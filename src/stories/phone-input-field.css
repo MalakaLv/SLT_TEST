@@ -225,6 +225,11 @@
 .phone-input-field--dark .phone-input-field__error-text {
   color: #ff7c7d;
 }
+
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
+  border: 1px solid #dbb685 !important;
+  border-right: 0 !important;
+}
 .phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
   border: 1px solid #dbb685 !important;
   border-right: 0 !important;

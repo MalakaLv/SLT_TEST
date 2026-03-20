@@ -83,7 +83,7 @@ export const PhoneInputField = ({
   const displayValue = hasLockedState ? value ?? '' : inputValue;
   const hasValue = displayValue.trim().length > 0;
 
-  const leftState: StandardListState | undefined = useMemo(() => {
+  const leftState: StandardListState = useMemo(() => {
     if (isDisabled) {
       return 'disabled';
     }
@@ -96,8 +96,14 @@ export const PhoneInputField = ({
     if (hasLockedState) {
       return 'default';
     }
-    return undefined;
-  }, [hasLockedState, isDisabled, state]);
+    if (leftOpen) {
+      return 'open';
+    }
+    if (leftHovered) {
+      return 'hover';
+    }
+    return 'default';
+  }, [hasLockedState, isDisabled, leftHovered, leftOpen, state]);
 
   const rightState = useMemo(() => {
     if (isDisabled) {
@@ -150,6 +156,7 @@ export const PhoneInputField = ({
       return;
     }
     event.preventDefault();
+    setLeftOpen(false);
     inputRef.current?.focus();
   };
 
@@ -168,6 +175,17 @@ export const PhoneInputField = ({
       >
         <div
           className="phone-input-field__left-zone"
+          onMouseDown={(event) => {
+            if (hasLockedState || isDisabled) {
+              return;
+            }
+            const target = event.target as HTMLElement;
+            if (target.closest('.country-selector__trigger')) {
+              event.preventDefault();
+              setRightHovered(false);
+              setLeftOpen((prev) => !prev);
+            }
+          }}
           onMouseEnter={() => {
             if (!hasLockedState && !isDisabled) {
               setLeftHovered(true);
@@ -182,7 +200,10 @@ export const PhoneInputField = ({
             disabled={isDisabled}
             visualState={leftState}
             value={countryIso2}
-            onChange={onCountryChange}
+            onChange={(iso2) => {
+              onCountryChange?.(iso2);
+              setLeftOpen(false);
+            }}
             onOpenChange={setLeftOpen}
             className="phone-input-field__country"
             ariaLabel="Select country"
