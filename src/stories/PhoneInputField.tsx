@@ -6,18 +6,7 @@ import type { StandardListState } from './StandardList';
 import './phone-input-field.css';
 
 export interface PhoneInputFieldProps {
-  state?:
-    | 'default'
-    | 'hover'
-    | 'hover-left'
-    | 'hover-right'
-    | 'focused'
-    | 'focused-left'
-    | 'focused-right'
-    | 'filled'
-    | 'error'
-    | 'success'
-    | 'disabled';
+  state?: 'default' | 'hover' | 'hover-left' | 'hover-right' | 'focused' | 'filled' | 'error' | 'success' | 'disabled';
   theme?: 'light' | 'dark';
   label?: string;
   value?: string;
@@ -90,9 +79,6 @@ export const PhoneInputField = ({
     if (state === 'hover-left') {
       return 'hover';
     }
-    if (state === 'focused-left') {
-      return 'open';
-    }
     if (hasLockedState) {
       return 'default';
     }
@@ -115,9 +101,6 @@ export const PhoneInputField = ({
     if (state === 'hover-right') {
       return 'hover';
     }
-    if (state === 'focused-right') {
-      return 'focused';
-    }
     if (hasLockedState) {
       if (state === 'focused') {
         return 'focused';
@@ -133,14 +116,12 @@ export const PhoneInputField = ({
     return 'default';
   }, [hasLockedState, isDisabled, isError, rightFocused, rightHovered, state]);
 
-  const isLeftHoverActive =
-    state === 'hover-left' || (!hasLockedState && !isDisabled && leftHovered && !leftOpen && rightState !== 'focused');
+  const isLeftHoverActive = leftState === 'hover';
   const isRightHoverActive = rightState === 'hover';
-  const isLeftFocusActive = (state === 'focused-left' || leftOpen) && rightState !== 'focused';
+  const isLeftFocusActive = leftState === 'open' && rightState !== 'focused';
   const isRightFocusActive = rightState === 'focused';
 
-  const showSmallLabel =
-    rightFocused || hasValue || state === 'filled' || state === 'focused' || state === 'focused-right' || isError || isSuccess;
+  const showSmallLabel = rightFocused || hasValue || state === 'filled' || state === 'focused' || isError || isSuccess;
   const showInputValue = showSmallLabel;
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -156,7 +137,6 @@ export const PhoneInputField = ({
       return;
     }
     event.preventDefault();
-    setLeftOpen(false);
     inputRef.current?.focus();
   };
 
@@ -175,17 +155,6 @@ export const PhoneInputField = ({
       >
         <div
           className="phone-input-field__left-zone"
-          onMouseDown={(event) => {
-            if (hasLockedState || isDisabled) {
-              return;
-            }
-            const target = event.target as HTMLElement;
-            if (target.closest('.country-selector__trigger')) {
-              event.preventDefault();
-              setRightHovered(false);
-              setLeftOpen((prev) => !prev);
-            }
-          }}
           onMouseEnter={() => {
             if (!hasLockedState && !isDisabled) {
               setLeftHovered(true);
@@ -200,10 +169,7 @@ export const PhoneInputField = ({
             disabled={isDisabled}
             visualState={leftState}
             value={countryIso2}
-            onChange={(iso2) => {
-              onCountryChange?.(iso2);
-              setLeftOpen(false);
-            }}
+            onChange={onCountryChange}
             onOpenChange={setLeftOpen}
             className="phone-input-field__country"
             ariaLabel="Select country"
