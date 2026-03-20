@@ -6,7 +6,18 @@ import type { StandardListState } from './StandardList';
 import './phone-input-field.css';
 
 export interface PhoneInputFieldProps {
-  state?: 'default' | 'hover' | 'hover-left' | 'hover-right' | 'focused' | 'filled' | 'error' | 'success' | 'disabled';
+  state?:
+    | 'default'
+    | 'hover'
+    | 'hover-left'
+    | 'hover-right'
+    | 'focused'
+    | 'focused-left'
+    | 'focused-right'
+    | 'filled'
+    | 'error'
+    | 'success'
+    | 'disabled';
   theme?: 'light' | 'dark';
   label?: string;
   value?: string;
@@ -79,6 +90,9 @@ export const PhoneInputField = ({
     if (state === 'hover-left') {
       return 'hover';
     }
+    if (state === 'focused-left') {
+      return 'open';
+    }
     if (hasLockedState) {
       return 'default';
     }
@@ -101,6 +115,9 @@ export const PhoneInputField = ({
     if (state === 'hover-right') {
       return 'hover';
     }
+    if (state === 'focused-right') {
+      return 'focused';
+    }
     if (hasLockedState) {
       if (state === 'focused') {
         return 'focused';
@@ -121,7 +138,8 @@ export const PhoneInputField = ({
   const isLeftFocusActive = leftState === 'open' && rightState !== 'focused';
   const isRightFocusActive = rightState === 'focused';
 
-  const showSmallLabel = rightFocused || hasValue || state === 'filled' || state === 'focused' || isError || isSuccess;
+  const showSmallLabel =
+    rightFocused || hasValue || state === 'filled' || state === 'focused' || state === 'focused-right' || isError || isSuccess;
   const showInputValue = showSmallLabel;
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {

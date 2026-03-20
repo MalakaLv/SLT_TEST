@@ -105,7 +105,6 @@
 
 .phone-input-field__row--focused-right .phone-input-field__right-zone {
   border: 2px solid #272727;
-  border-left: 1px solid #272727;
 }
 
 .phone-input-field__right-zone--focused {
