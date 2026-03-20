@@ -10,8 +10,6 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
-    tripTypeLabel: 'Trip Type',
-    passengersClassLabel: 'Passengers & Class',
     fromLabel: 'From*',
     toLabel: 'To*',
     departureDateLabel: 'Departure Date',

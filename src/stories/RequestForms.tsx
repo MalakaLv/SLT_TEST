@@ -6,8 +6,6 @@ import './request-forms.css';
 
 export interface RequestFormsProps {
   className?: string;
-  tripTypeLabel?: string;
-  passengersClassLabel?: string;
   fromLabel?: string;
   toLabel?: string;
   departureDateLabel?: string;
@@ -20,8 +18,6 @@ export interface RequestFormsProps {
 
 export const RequestForms = ({
   className,
-  tripTypeLabel = 'Trip Type',
-  passengersClassLabel = 'Passengers & Class',
   fromLabel = 'From*',
   toLabel = 'To*',
   departureDateLabel = 'Departure Date',
@@ -35,12 +31,10 @@ export const RequestForms = ({
     <form className={['request-forms', className ?? ''].filter(Boolean).join(' ')} onSubmit={(event) => event.preventDefault()}>
       <div className="request-forms__row">
         <div className="request-forms__cell">
-          <label className="request-forms__field-label">{tripTypeLabel}</label>
-          <DropdownField ariaLabel={tripTypeLabel} />
+          <DropdownField />
         </div>
         <div className="request-forms__cell">
-          <label className="request-forms__field-label">{passengersClassLabel}</label>
-          <DropdownField ariaLabel={passengersClassLabel} />
+          <DropdownField />
         </div>
       </div>
 
