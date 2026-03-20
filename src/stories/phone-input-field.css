@@ -60,11 +60,13 @@
   background: #ffffff;
 }
 
-/* HOVER LEFT */
-.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger,
-.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
-  border: 1px solid #dbb685 !important;
-  border-right: 0 !important;
+.phone-input-field__right-zone--hover {
+  border-color: #dbb685;
+  background: #fffcf9;
+}
+
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger {
+  border: 1px solid #dbb685;
   background: #fffcf9;
 }
 
@@ -72,46 +74,37 @@
   background: #dbb685;
 }
 
-/* HOVER RIGHT */
 .phone-input-field__row--hover-right .phone-input-field__right-zone {
   border: 1px solid #dbb685;
   background: #fffcf9;
 }
 
-.phone-input-field__row--hover-right .phone-input-field__zone-divider {
-  display: none;
-}
-
-/* FOCUSED LEFT */
+.phone-input-field__row--hover-right .phone-input-field__zone-divider,
+.phone-input-field__row--focused-right .phone-input-field__zone-divider,
 .phone-input-field__row--focused-left .phone-input-field__zone-divider {
   display: none;
 }
 
-.phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger,
-.phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger--open,
-.phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger--hover {
-  border: 2px solid #272727 !important;
-  border-right: 0 !important;
+.phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger {
+  border: 2px solid #272727;
+  border-right: 0;
   background: #ffffff;
 }
 
 .phone-input-field__row--focused-left .phone-input-field__right-zone {
   border: 1px solid #b7b7b7;
-  border-left: 2px solid #272727;
+  border-left: 0;
+  background: #ffffff;
 }
 
-/* FOCUSED RIGHT */
-.phone-input-field__row--focused-right .phone-input-field__zone-divider {
-  display: none;
+.phone-input-field__row--focused-right .phone-input-field__country .country-selector__trigger {
+  border: 1px solid #b7b7b7;
+  border-right: 0;
+  background: #ffffff;
 }
 
 .phone-input-field__row--focused-right .phone-input-field__right-zone {
   border: 2px solid #272727;
-}
-
-.phone-input-field__row--focused-right .phone-input-field__country .country-selector__trigger {
-  border: 1px solid #b7b7b7 !important;
-  border-right: 0 !important;
 }
 
 .phone-input-field__right-zone--focused {
@@ -120,7 +113,6 @@
   padding: 0 7px;
 }
 
-/* ERROR */
 .phone-input-field__right-zone--error {
   background: #ffe8e8;
 }
@@ -134,7 +126,6 @@
   border-color: #ff7c7d;
 }
 
-/* DISABLED */
 .phone-input-field__right-zone--disabled {
   background: #eeeeee;
   border-color: #d7d7d7;
@@ -233,4 +224,13 @@
 
 .phone-input-field--dark .phone-input-field__error-text {
   color: #ff7c7d;
+}
+
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
+  border: 1px solid #dbb685 !important;
+  border-right: 0 !important;
+}
+.phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
+  border: 1px solid #dbb685 !important;
+  border-right: 0 !important;
 }
