@@ -75,6 +75,7 @@
 /* HOVER RIGHT */
 .phone-input-field__row--hover-right .phone-input-field__right-zone {
   border: 1px solid #dbb685;
+  border-left: 1px solid #dbb685;
   background: #fffcf9;
 }
 
