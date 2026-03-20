@@ -26,6 +26,7 @@
 .country-selector__trigger--hover {
   background: #fffcf9;
   border-color: #dbb685;
+  border-width: 1px;
 }
 
 .country-selector__trigger--disabled {
