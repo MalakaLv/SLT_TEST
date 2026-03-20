@@ -33,9 +33,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const darkDecorator = (StoryComponent: () => React.JSX.Element) => (
-  <div style={{ padding: '24px', background: 'linear-gradient(90deg, #1f1f1f 0%, #2d2d2d 100%)' }}>
-    <StoryComponent />
+const darkDecorator = (Story: () => React.JSX.Element) => (
+  <div
+    style={{
+      background: '#272727',
+      padding: '40px',
+      width: '100%',
+      minHeight: '200px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Story />
   </div>
 );
 
