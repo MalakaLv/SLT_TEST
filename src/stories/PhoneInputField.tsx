@@ -83,7 +83,7 @@ export const PhoneInputField = ({
   const displayValue = hasLockedState ? value ?? '' : inputValue;
   const hasValue = displayValue.trim().length > 0;
 
-  const leftState: StandardListState = useMemo(() => {
+  const leftState: StandardListState | undefined = useMemo(() => {
     if (isDisabled) {
       return 'disabled';
     }
@@ -96,14 +96,8 @@ export const PhoneInputField = ({
     if (hasLockedState) {
       return 'default';
     }
-    if (leftOpen) {
-      return 'open';
-    }
-    if (leftHovered) {
-      return 'hover';
-    }
-    return 'default';
-  }, [hasLockedState, isDisabled, leftHovered, leftOpen, state]);
+    return undefined;
+  }, [hasLockedState, isDisabled, state]);
 
   const rightState = useMemo(() => {
     if (isDisabled) {
@@ -133,9 +127,10 @@ export const PhoneInputField = ({
     return 'default';
   }, [hasLockedState, isDisabled, isError, rightFocused, rightHovered, state]);
 
-  const isLeftHoverActive = leftState === 'hover';
+  const isLeftHoverActive =
+    state === 'hover-left' || (!hasLockedState && !isDisabled && leftHovered && !leftOpen && rightState !== 'focused');
   const isRightHoverActive = rightState === 'hover';
-  const isLeftFocusActive = leftState === 'open' && rightState !== 'focused';
+  const isLeftFocusActive = (state === 'focused-left' || leftOpen) && rightState !== 'focused';
   const isRightFocusActive = rightState === 'focused';
 
   const showSmallLabel =

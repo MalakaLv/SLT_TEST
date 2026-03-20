@@ -18,7 +18,7 @@ const meta = {
     },
     state: {
       control: 'inline-radio',
-      options: ['default', 'hover-left', 'hover-right', 'focused', 'focused-left', 'focused-right', 'filled', 'error', 'success', 'disabled'],
+      options: ['default', 'hover-left', 'hover-right', 'focused-left', 'focused-right', 'filled', 'error', 'success', 'disabled'],
     },
   },
   args: {
@@ -59,10 +59,6 @@ export const HoverLeft: Story = {
 
 export const HoverRight: Story = {
   args: { theme: 'light', state: 'hover-right' },
-};
-
-export const Focused: Story = {
-  args: { theme: 'light', state: 'focused', value: '+1' },
 };
 
 export const FocusedLeft: Story = {
@@ -106,11 +102,6 @@ export const DarkHover: Story = {
 
 export const DarkHoverRight: Story = {
   args: { theme: 'dark', state: 'hover-right' },
-  decorators: [darkDecorator],
-};
-
-export const DarkFocused: Story = {
-  args: { theme: 'dark', state: 'focused', value: '+1' },
   decorators: [darkDecorator],
 };
 
