@@ -74,8 +74,8 @@
 
 /* HOVER RIGHT */
 .phone-input-field__row--hover-right .phone-input-field__right-zone {
-  border: 1px solid #dbb685;
-  border-left: 1px solid #dbb685;
+  outline: 1px solid #dbb685;
+  outline-offset: -1px;
   background: #fffcf9;
 }
 
@@ -91,14 +91,14 @@
 .phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger,
 .phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger--open,
 .phone-input-field__row--focused-left .phone-input-field__country .country-selector__trigger--hover {
-  border: 2px solid #272727 !important;
-  border-right: 0 !important;
+  outline: 2px solid #272727 !important;
+  outline-offset: -2px;
   background: #ffffff;
 }
 
 .phone-input-field__row--focused-left .phone-input-field__right-zone {
   border: 1px solid #b7b7b7;
-  border-left: 2px solid #272727;
+  border-left: 1px solid transparent;
 }
 
 /* FOCUSED RIGHT */
@@ -107,7 +107,8 @@
 }
 
 .phone-input-field__row--focused-right .phone-input-field__right-zone {
-  border: 2px solid #272727;
+  outline: 2px solid #272727;
+  outline-offset: -2px;
 }
 
 .phone-input-field__row--focused-right .phone-input-field__country .country-selector__trigger {
@@ -116,9 +117,8 @@
 }
 
 .phone-input-field__right-zone--focused {
-  border-width: 2px;
-  border-color: #272727;
-  padding: 0 7px;
+  outline: 2px solid #272727;
+  outline-offset: -2px;
 }
 
 /* ERROR */
