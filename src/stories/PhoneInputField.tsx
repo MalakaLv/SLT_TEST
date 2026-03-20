@@ -175,6 +175,23 @@ export const PhoneInputField = ({
       >
         <div
           className="phone-input-field__left-zone"
+          onClick={(event) => {
+            const target = event.target as HTMLElement;
+            if (target.closest('.country-selector__trigger')) {
+              console.log('left clicked');
+            }
+          }}
+          onMouseDown={(event) => {
+            if (hasLockedState || isDisabled) {
+              return;
+            }
+            const target = event.target as HTMLElement;
+            if (target.closest('.country-selector__trigger')) {
+              event.preventDefault();
+              setRightHovered(false);
+              setLeftOpen((prev) => !prev);
+            }
+          }}
           onMouseEnter={() => {
             if (!hasLockedState && !isDisabled) {
               setLeftHovered(true);
