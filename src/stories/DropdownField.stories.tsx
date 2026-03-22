@@ -20,9 +20,14 @@ const meta = {
       control: 'inline-radio',
       options: ['enabled', 'hover', 'open', 'disabled'],
     },
+    iconSize: {
+      control: 'inline-radio',
+      options: [16, 20, 24],
+    },
   },
   args: {
     onChange: fn(),
+    iconSize: 16,
   },
 } satisfies Meta<typeof DropdownField>;
 

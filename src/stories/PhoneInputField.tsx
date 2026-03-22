@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, MouseEvent } from 'react';
 
 import { CountrySelector } from './CountrySelector';
+import { ErrorIcon, SuccessIcon } from './icons/Icons';
 import type { StandardListState } from './StandardList';
 import './phone-input-field.css';
 
@@ -27,33 +28,8 @@ export interface PhoneInputFieldProps {
   onChange?: (value: string) => void;
   errorText?: string;
   className?: string;
+  flagSize?: 16 | 20 | 24;
 }
-
-const ErrorStatusIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    className="phone-input-field__status-svg phone-input-field__status-svg--error"
-  >
-    <circle cx="8" cy="8" r="7.2" />
-    <path d="M8 4.4V8.8M8 11.3V11.7" />
-  </svg>
-);
-
-const SuccessStatusIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    className="phone-input-field__status-svg phone-input-field__status-svg--success"
-  >
-    <circle cx="8" cy="8" r="7.2" />
-    <path d="M4.8 8.2L7.1 10.2L11.2 6.1" />
-  </svg>
-);
 
 export const PhoneInputField = ({
   state = 'default',
@@ -66,6 +42,7 @@ export const PhoneInputField = ({
   onChange,
   errorText = 'Please enter the full phone number',
   className,
+  flagSize = 24,
 }: PhoneInputFieldProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -188,6 +165,7 @@ export const PhoneInputField = ({
             theme={theme}
             disabled={isDisabled}
             visualState={leftState}
+            flagSize={flagSize}
             value={countryIso2}
             onChange={(iso2) => {
               onCountryChange?.(iso2);
@@ -246,8 +224,18 @@ export const PhoneInputField = ({
           </div>
 
           <span className="phone-input-field__status">
-            {isError ? <ErrorStatusIcon /> : null}
-            {isSuccess ? <SuccessStatusIcon /> : null}
+            {isError ? (
+              <ErrorIcon
+                containerSize={16}
+                className="phone-input-field__status-svg phone-input-field__status-svg--error"
+              />
+            ) : null}
+            {isSuccess ? (
+              <SuccessIcon
+                containerSize={16}
+                className="phone-input-field__status-svg phone-input-field__status-svg--success"
+              />
+            ) : null}
           </span>
         </div>
       </div>

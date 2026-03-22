@@ -2,14 +2,14 @@
   width: min(100%, 760px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   box-sizing: border-box;
 }
 
 .request-forms__row {
   width: 100%;
   display: flex;
-  gap: 16px;
+  gap: 8px;
   align-items: start;
 }
 
@@ -36,7 +36,9 @@
 }
 
 .request-forms .dropdown-field,
+.request-forms .complex-dropdown-button,
 .request-forms .dropdown-field__trigger,
+.request-forms .complex-dropdown-button__trigger,
 .request-forms .input-field,
 .request-forms .phone-input-field {
   width: 100%;

@@ -22,9 +22,18 @@ const meta = {
       control: 'inline-radio',
       options: [48, 60],
     },
+    iconSize: {
+      control: 'inline-radio',
+      options: [16, 20, 24],
+    },
+    inputText: {
+      control: 'text',
+    },
   },
   args: {
     size: 48,
+    iconSize: 24,
+    inputText: 'Input Text',
     label: 'Label',
     errorText: 'Please enter your email address',
   },
@@ -80,8 +89,10 @@ export const Hovered: Story = {
 
 export const FilledLight: Story = {
   args: {
-    theme: 'light',
     state: 'filled',
+    theme: 'light',
+    inputText: 'Input Text',
+    value: 'Input Text',
   },
 };
 

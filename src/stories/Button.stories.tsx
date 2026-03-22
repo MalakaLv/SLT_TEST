@@ -23,12 +23,17 @@ const meta = {
     fullWidth: {
       control: 'boolean',
     },
+    iconSize: {
+      control: 'inline-radio',
+      options: [16, 20, 24],
+    },
     children: {
       control: 'text',
     },
   },
   args: {
     children: 'Button',
+    iconSize: 20,
     onClick: fn(),
   },
 } satisfies Meta<typeof Button>;

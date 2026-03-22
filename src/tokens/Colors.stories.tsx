@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import './colors.css';
 
-const TOKENS = [{ name: '--slt-black', value: '#272727' }];
+const TOKENS = [
+  { name: '--slt-black', value: '#272727' },
+  { name: '--slt-brand', value: '#DBB685' },
+];
 
 const ColorsGallery = () => (
   <div style={{ display: 'grid', gap: '12px', maxWidth: '320px' }}>

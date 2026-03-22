@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import type { MouseEvent } from 'react';
+import type { CSSProperties, MouseEvent } from 'react';
 
+import { ClearIcon, ErrorIcon } from './icons/Icons';
 import { InputFieldBase } from './InputFieldBase';
 import './InputField.css';
 
@@ -10,24 +11,13 @@ export interface InputFieldProps {
   size?: 48 | 60;
   label?: string;
   value?: string;
+  inputText?: string;
   defaultValue?: string;
   errorText?: string;
   className?: string;
+  iconSize?: 16 | 20 | 24;
+  showIcon?: boolean;
 }
-
-const ClearStatusIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" className="input-field__status-svg">
-    <circle cx="8" cy="8" r="7.2" />
-    <path d="M5.3 5.3L10.7 10.7M10.7 5.3L5.3 10.7" />
-  </svg>
-);
-
-const ErrorStatusIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" className="input-field__status-svg">
-    <circle cx="8" cy="8" r="7.2" />
-    <path d="M8 4.4V8.8M8 11.3V11.7" />
-  </svg>
-);
 
 export const InputField = ({
   state = 'default',
@@ -35,9 +25,12 @@ export const InputField = ({
   size = 48,
   label = 'Label',
   value,
+  inputText = 'Input Text',
   defaultValue = '',
   errorText = 'Please enter your email address',
   className,
+  iconSize = 24,
+  showIcon = true,
 }: InputFieldProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -60,13 +53,17 @@ export const InputField = ({
   const isFocusedVisual = effectiveState === 'focused';
   const isFilled = effectiveState === 'filled';
   const isDisabled = effectiveState === 'disabled';
-  const inputDisplayValue = hasExplicitState ? value ?? '' : inputValue;
-  const resolvedValue =
-    hasExplicitState && effectiveState === 'filled' ? value ?? 'Input Text' : inputDisplayValue;
+  const inputDisplayValue = hasExplicitState ? value : inputValue;
+  const resolvedValue = hasExplicitState && effectiveState === 'filled' ? inputText : (inputDisplayValue ?? '');
+  const forwardedInputValue =
+    hasExplicitState && effectiveState === 'filled' ? undefined : (inputDisplayValue ?? '');
   const showClear = isFocused === true && inputValue.length > 0;
 
   const baseType = isFilled ? (size === 60 ? 'semiBold' : 'filled') : 'empty';
   const baseState = isDisabled ? 'disabled' : isFocusedVisual || isError ? 'action' : isHover ? 'hover' : 'active';
+  const iconSizeStyle = {
+    '--input-field-icon-size': `${iconSize}px`,
+  } as CSSProperties;
 
   const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -88,6 +85,7 @@ export const InputField = ({
       ]
         .filter(Boolean)
         .join(' ')}
+      style={iconSizeStyle}
       onMouseEnter={() => {
         if (!hasExplicitState) {
           setIsHovered(true);
@@ -112,7 +110,7 @@ export const InputField = ({
           state={baseState}
           label={label}
           value={resolvedValue}
-          inputValue={inputDisplayValue}
+          inputValue={forwardedInputValue}
           inputDisabled={isDisabled}
           inputRef={inputRef}
           onInputFocus={() => {
@@ -124,6 +122,8 @@ export const InputField = ({
           onInputChange={(nextValue) => {
             setInputValue(nextValue);
           }}
+          showIcon={showIcon}
+          iconSize={iconSize}
           className="input-field__base"
         />
 
@@ -142,9 +142,9 @@ export const InputField = ({
             aria-hidden={!showClear}
             tabIndex={showClear ? 0 : -1}
           >
-            <ClearStatusIcon />
+            <ClearIcon containerSize={iconSize} className="input-field__status-svg" />
           </button>
-          {isError ? <ErrorStatusIcon /> : null}
+          {isError ? <ErrorIcon containerSize={iconSize} className="input-field__status-svg" /> : null}
         </span>
       </div>
 

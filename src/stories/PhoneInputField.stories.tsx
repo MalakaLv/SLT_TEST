@@ -20,9 +20,14 @@ const meta = {
       control: 'inline-radio',
       options: ['default', 'hover-left', 'hover-right', 'focused-left', 'focused-right', 'filled', 'error', 'success', 'disabled'],
     },
+    flagSize: {
+      control: 'inline-radio',
+      options: [16, 20, 24],
+    },
   },
   args: {
     label: 'Phone number*',
+    flagSize: 24,
     onChange: fn(),
     onCountryChange: fn(),
   },

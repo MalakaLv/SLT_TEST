@@ -36,9 +36,9 @@
 }
 
 .input-field__status {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: var(--input-field-icon-size, 16px);
+  height: var(--input-field-icon-size, 16px);
+  flex: 0 0 var(--input-field-icon-size, 16px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -46,8 +46,8 @@
 }
 
 .input-field__clear-btn {
-  width: 16px;
-  height: 16px;
+  width: var(--input-field-icon-size, 16px);
+  height: var(--input-field-icon-size, 16px);
   padding: 0;
   margin: 0;
   border: 0;
@@ -66,8 +66,8 @@
 }
 
 .input-field__status-svg {
-  width: 16px;
-  height: 16px;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -87,6 +87,13 @@
   letter-spacing: 0;
 }
 
+.input-field__label,
+.input-field__native-input {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .input-field--light.input-field--default .input-field__body,
 .input-field--light.input-field--filled .input-field__body {
   border-color: #b7b7b7;
@@ -99,7 +106,7 @@
 
 .input-field--hover .input-field__body {
   background: #fffcf9;
-  border-color: #dbb685;
+  border-color: var(--slt-brand);
 }
 
 .input-field--focused .input-field__body {

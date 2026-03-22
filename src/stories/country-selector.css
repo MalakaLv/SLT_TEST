@@ -25,7 +25,7 @@
 
 .country-selector__trigger--hover {
   background: #fffcf9;
-  border-color: #dbb685;
+  border-color: var(--slt-brand);
   border-width: 1px;
 }
 
@@ -73,7 +73,7 @@
 .country-selector__chevron-svg path {
   fill: none;
   stroke: currentcolor;
-  stroke-width: 1.8;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

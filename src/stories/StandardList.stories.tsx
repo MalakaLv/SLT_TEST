@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { Button } from './Button';
+import { PlusIcon } from './icons/Icons';
 import { StandardList } from './StandardList';
 import './dropdown-field.css';
 import './country-selector.css';
@@ -131,6 +133,47 @@ const CountryListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
   );
 };
 
+const AdditionalInfoListPanel = () => (
+  <div className="standard-list-story__additional-info">
+    <section className="standard-list-story__section">
+      <h3 className="standard-list-story__title">Travelers</h3>
+      <div className="standard-list-story__traveler-row">
+        <p className="standard-list-story__label">Passenger</p>
+        <div className="standard-list-story__counter">
+          <button type="button" className="standard-list-story__icon-button" aria-label="Decrease passenger count">
+            <span className="standard-list-story__minus-icon" aria-hidden="true" />
+          </button>
+          <span className="standard-list-story__counter-value">1</span>
+          <button type="button" className="standard-list-story__icon-button" aria-label="Increase passenger count">
+            <PlusIcon containerSize={20} className="standard-list-story__plus-icon" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div className="standard-list-story__divider" aria-hidden="true" />
+
+    <section className="standard-list-story__section">
+      <h3 className="standard-list-story__title">Cabin Class</h3>
+      <div className="standard-list-story__chips">
+        <button type="button" className="standard-list-story__chip standard-list-story__chip--selected">
+          Business Class
+        </button>
+        <button type="button" className="standard-list-story__chip">
+          First Class
+        </button>
+        <button type="button" className="standard-list-story__chip">
+          Premium Economy
+        </button>
+      </div>
+    </section>
+
+    <Button leftIcon={false} rightIcon={false} fullWidth className="standard-list-story__done-button">
+      Done
+    </Button>
+  </div>
+);
+
 const meta = {
   title: 'Components/StandardList',
   component: DefaultListMenu,
@@ -150,4 +193,9 @@ export const DefaultList: Story = {
 
 export const CountryList: Story = {
   render: () => <CountryListMenu theme="light" />,
+};
+
+export const AdditionalInfoList: Story = {
+  name: 'Additional Info List',
+  render: () => <AdditionalInfoListPanel />,
 };

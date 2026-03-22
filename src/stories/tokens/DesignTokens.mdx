@@ -1,0 +1,96 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import '../../tokens/colors.css';
+
+<Meta title="Design Tokens/Overview" />
+
+# Design Tokens Overview
+
+This page documents the shared tokens used across the SLT component library.
+
+## Colors
+
+<div style={{ display: 'grid', gap: '12px', maxWidth: '760px' }}>
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '56px 1fr',
+      gap: '12px',
+      alignItems: 'start',
+      border: '1px solid #e5e5e5',
+      background: '#ffffff',
+      padding: '12px',
+    }}
+  >
+    <span style={{ width: '40px', height: '40px', background: 'var(--slt-black)', border: '1px solid #d7d7d7' }} />
+    <div>
+      <div><strong>--slt-black</strong>: <code>#272727</code></div>
+      <div style={{ marginTop: '6px', fontSize: '14px' }}>
+        Used in: Button text/icons, InputField text, DropdownField text/icons, PhoneInputField text/icons.
+      </div>
+    </div>
+  </div>
+
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '56px 1fr',
+      gap: '12px',
+      alignItems: 'start',
+      border: '1px solid #e5e5e5',
+      background: '#ffffff',
+      padding: '12px',
+    }}
+  >
+    <span style={{ width: '40px', height: '40px', background: 'var(--slt-brand)', border: '1px solid #d7d7d7' }} />
+    <div>
+      <div><strong>--slt-brand</strong>: <code>#DBB685</code></div>
+      <div style={{ marginTop: '6px', fontSize: '14px' }}>
+        Used in: Button primary background, hover/focus borders in InputField, DropdownField, CountrySelector, PhoneInputField, DropdownButton.
+      </div>
+    </div>
+  </div>
+</div>
+
+## Typography
+
+<div style={{ display: 'grid', gap: '10px', maxWidth: '560px' }}>
+  <div style={{ border: '1px solid #e5e5e5', padding: '10px 12px', background: '#ffffff' }}>
+    <div style={{ fontSize: '12px', lineHeight: 1.4 }}>12px - Label small (InputField focused/filled)</div>
+  </div>
+  <div style={{ border: '1px solid #e5e5e5', padding: '10px 12px', background: '#ffffff' }}>
+    <div style={{ fontSize: '16px', lineHeight: 1.5 }}>16px - Default text, button, input</div>
+  </div>
+</div>
+
+## Spacing
+
+<div style={{ display: 'grid', gap: '10px', maxWidth: '700px' }}>
+  {[4, 8, 12, 16, 20, 24].map((space) => (
+    <div
+      key={space}
+      style={{
+        border: '1px solid #e5e5e5',
+        padding: '10px 12px',
+        background: '#ffffff',
+        display: 'grid',
+        gridTemplateColumns: '100px 1fr',
+        alignItems: 'center',
+        gap: '12px',
+      }}
+    >
+      <code>{space}px</code>
+      <div style={{ height: '10px', background: '#272727', width: `${space * 8}px` }} />
+    </div>
+  ))}
+</div>
+
+## Border
+
+<div style={{ display: 'grid', gap: '12px', maxWidth: '560px' }}>
+  <div style={{ border: '1px solid #272727', padding: '12px', background: '#ffffff' }}>
+    <strong>1px solid</strong> - default border
+  </div>
+  <div style={{ border: '2px solid #272727', padding: '11px', background: '#ffffff' }}>
+    <strong>2px solid</strong> - focused border
+  </div>
+</div>

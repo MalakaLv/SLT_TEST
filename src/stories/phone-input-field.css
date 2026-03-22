@@ -63,18 +63,18 @@
 /* HOVER LEFT */
 .phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger,
 .phone-input-field__row--hover-left .phone-input-field__country .country-selector__trigger--hover {
-  border: 1px solid #dbb685 !important;
+  border: 1px solid var(--slt-brand) !important;
   border-right: 0 !important;
   background: #fffcf9;
 }
 
 .phone-input-field__row--hover-left .phone-input-field__zone-divider {
-  background: #dbb685;
+  background: var(--slt-brand);
 }
 
 /* HOVER RIGHT */
 .phone-input-field__row--hover-right .phone-input-field__right-zone {
-  outline: 1px solid #dbb685;
+  outline: 1px solid var(--slt-brand);
   outline-offset: -1px;
   background: #fffcf9;
 }
@@ -182,17 +182,17 @@
 }
 
 .phone-input-field__status {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: var(--phone-input-field-icon-size, 16px);
+  height: var(--phone-input-field-icon-size, 16px);
+  flex: 0 0 var(--phone-input-field-icon-size, 16px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .phone-input-field__status-svg {
-  width: 16px;
-  height: 16px;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 

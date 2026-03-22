@@ -1,5 +1,5 @@
 .storybook-button {
-  --button-bg: #dbb685;
+  --button-bg: var(--slt-brand);
   --button-color: var(--slt-black);
   --button-border-color: transparent;
   --button-border-width: 0;
@@ -39,29 +39,18 @@
 }
 
 .storybook-button__icon {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
+  width: var(--button-icon-size, 16px);
+  height: var(--button-icon-size, 16px);
+  flex: 0 0 var(--button-icon-size, 16px);
+  display: block;
 }
 
-.storybook-button__icon::before,
-.storybook-button__icon::after {
-  content: '';
-  position: absolute;
-  inset: 50% auto auto 50%;
-  background: currentcolor;
-  transform: translate(-50%, -50%);
-}
-
-.storybook-button__icon::before {
-  width: 14px;
-  height: 1.8px;
-}
-
-.storybook-button__icon::after {
-  width: 1.8px;
-  height: 14px;
+.storybook-button__icon path {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .storybook-button--primary {
@@ -78,7 +67,7 @@
 }
 
 .storybook-button--default.storybook-button--primary {
-  --button-bg: #dbb685;
+  --button-bg: var(--slt-brand);
 }
 
 .storybook-button--hovered.storybook-button--primary {

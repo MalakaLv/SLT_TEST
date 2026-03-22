@@ -1,5 +1,5 @@
 import { Button } from './Button';
-import { DropdownField } from './DropdownField';
+import { DropdownButton } from './complex-components/DropdownButton';
 import { InputField } from './InputField';
 import { PhoneInputField } from './PhoneInputField';
 import './request-forms.css';
@@ -31,28 +31,28 @@ export const RequestForms = ({
     <form className={['request-forms', className ?? ''].filter(Boolean).join(' ')} onSubmit={(event) => event.preventDefault()}>
       <div className="request-forms__row">
         <div className="request-forms__cell">
-          <DropdownField />
+          <DropdownButton variant="text-only" listType="standard" defaultValue="round-trip" ariaLabel="Trip type" />
         </div>
         <div className="request-forms__cell">
-          <DropdownField />
-        </div>
-      </div>
-
-      <div className="request-forms__row">
-        <div className="request-forms__cell">
-          <InputField label={fromLabel} state="default" />
-        </div>
-        <div className="request-forms__cell">
-          <InputField label={toLabel} state="default" />
+          <DropdownButton variant="info" listType="additional-info" ariaLabel="Additional travel info" />
         </div>
       </div>
 
       <div className="request-forms__row">
         <div className="request-forms__cell">
-          <InputField label={departureDateLabel} state="default" />
+          <InputField label={fromLabel} state="default" showIcon={false} />
         </div>
         <div className="request-forms__cell">
-          <InputField label={returnDateLabel} state="default" />
+          <InputField label={toLabel} state="default" showIcon={false} />
+        </div>
+      </div>
+
+      <div className="request-forms__row">
+        <div className="request-forms__cell">
+          <InputField label={departureDateLabel} state="default" showIcon={false} />
+        </div>
+        <div className="request-forms__cell">
+          <InputField label={returnDateLabel} state="default" showIcon={false} />
         </div>
       </div>
 
@@ -64,15 +64,15 @@ export const RequestForms = ({
 
       <div className="request-forms__row">
         <div className="request-forms__cell">
-          <InputField label={emailLabel} state="default" />
+          <InputField label={emailLabel} state="default" showIcon={false} />
         </div>
         <div className="request-forms__cell">
-          <InputField label={nameLabel} state="default" />
+          <InputField label={nameLabel} state="default" showIcon={false} />
         </div>
       </div>
 
       <div className="request-forms__actions">
-        <Button label={submitLabel} leftIcon={false} rightIcon={false} />
+        <Button label={submitLabel} leftIcon={false} rightIcon={false} fullWidth={true} />
       </div>
     </form>
   );

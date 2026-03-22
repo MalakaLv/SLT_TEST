@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from './icons/Icons';
 import { StandardList } from './StandardList';
 import type { StandardListState } from './StandardList';
 import './country-selector.css';
@@ -23,6 +24,7 @@ export interface CountrySelectorProps {
   className?: string;
   searchPlaceholder?: string;
   ariaLabel?: string;
+  flagSize?: 16 | 20 | 24;
 }
 
 const DEFAULT_COUNTRIES: CountryOption[] = [
@@ -31,9 +33,6 @@ const DEFAULT_COUNTRIES: CountryOption[] = [
   { iso2: 'CA', name: 'Canada', dialCode: '+1', flag: '🇨🇦' },
   { iso2: 'LV', name: 'Latvija', dialCode: '+371', flag: '🇱🇻' },
 ];
-
-const CHEVRON_DOWN_PATH = 'M4 6L8 10L12 6';
-const CHEVRON_UP_PATH = 'M4 10L8 6L12 10';
 
 export const CountrySelector = ({
   countries = DEFAULT_COUNTRIES,
@@ -47,8 +46,12 @@ export const CountrySelector = ({
   className,
   searchPlaceholder = 'Search',
   ariaLabel = 'Country code',
+  flagSize = 24,
 }: CountrySelectorProps) => {
   const [query, setQuery] = useState('');
+  const triggerFlagSize = flagSize;
+  const triggerChevronSize = 16;
+  const triggerFlagFontSize = Math.round(triggerFlagSize * 0.75);
 
   const filteredCountries = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -90,13 +93,23 @@ export const CountrySelector = ({
           className={['country-selector__trigger', `country-selector__trigger--${stateClass}`].join(' ')}
         >
           <span className="country-selector__value-wrap">
-            <span className="country-selector__flag" aria-hidden="true">
+            <span
+              className="country-selector__flag"
+              aria-hidden="true"
+              style={{ width: triggerFlagSize, height: triggerFlagSize, fontSize: triggerFlagFontSize }}
+            >
               {selectedOption?.flag}
             </span>
-            <span className="country-selector__chevron" aria-hidden="true">
-              <svg viewBox="0 0 16 16" className="country-selector__chevron-svg">
-                <path d={open ? CHEVRON_UP_PATH : CHEVRON_DOWN_PATH} />
-              </svg>
+            <span
+              className="country-selector__chevron"
+              aria-hidden="true"
+              style={{ width: triggerChevronSize, height: triggerChevronSize }}
+            >
+              {open ? (
+                <ChevronUpIcon containerSize={triggerChevronSize} className="country-selector__chevron-svg" />
+              ) : (
+                <ChevronDownIcon containerSize={triggerChevronSize} className="country-selector__chevron-svg" />
+              )}
             </span>
           </span>
           <span className="country-selector__separator" aria-hidden="true" />
@@ -104,9 +117,7 @@ export const CountrySelector = ({
       )}
       renderMenuHeader={() => (
         <div className="country-selector__search-wrap">
-          <span className="country-selector__search-icon" aria-hidden="true">
-            ⌕
-          </span>
+          <SearchIcon containerSize={20} className="country-selector__search-icon" />
           <input
             type="text"
             className="country-selector__search-input"

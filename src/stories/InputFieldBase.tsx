@@ -1,5 +1,6 @@
-import type { RefObject } from 'react';
+import type { CSSProperties, RefObject } from 'react';
 
+import { PlusIcon as SharedPlusIcon } from './icons/Icons';
 import './InputFieldBase.css';
 
 export interface InputFieldBaseProps {
@@ -15,17 +16,20 @@ export interface InputFieldBaseProps {
   onInputChange?: (value: string) => void;
   inputDisabled?: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
+  iconSize?: 16 | 20 | 24;
 }
 
-const PlusIcon = ({ tone }: { tone: 'active-empty' | 'default' | 'disabled' }) => (
-  <span className={['input-field-base__icon', `input-field-base__icon--${tone}`].join(' ')} aria-hidden="true">
-    <svg width="24" height="24" viewBox="0 0 24 24" className="input-field-base__icon-svg">
-      <g transform="translate(3 3)">
-        <svg width="18" height="18" viewBox="0 0 18 18">
-          <path d="M9 2.5V15.5M2.5 9H15.5" />
-        </svg>
-      </g>
-    </svg>
+const PlusIcon = ({ tone, size }: { tone: 'active-empty' | 'default' | 'disabled'; size: 16 | 20 | 24 }) => (
+  <span
+    className={['input-field-base__icon', `input-field-base__icon--${tone}`].join(' ')}
+    aria-hidden="true"
+    style={
+      {
+        '--input-field-base-icon-size': `${size}px`,
+      } as CSSProperties
+    }
+  >
+    <SharedPlusIcon containerSize={size} className="input-field-base__icon-svg" />
   </span>
 );
 
@@ -42,6 +46,7 @@ export const InputFieldBase = ({
   onInputChange,
   inputDisabled = false,
   inputRef,
+  iconSize = 24,
 }: InputFieldBaseProps) => {
   const isEmpty = type === 'empty';
   const isSemiBold = type === 'semiBold';
@@ -64,7 +69,7 @@ export const InputFieldBase = ({
         .filter(Boolean)
         .join(' ')}
     >
-      {showIcon ? <PlusIcon tone={iconTone} /> : null}
+      {showIcon ? <PlusIcon tone={iconTone} size={iconSize} /> : null}
 
       <div className="input-field-base__text">
         <span className={['input-field-base__label', `input-field-base__label--${labelSize}`].join(' ')}>

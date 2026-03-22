@@ -1,5 +1,6 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
 
+import { PlusIcon } from './icons/Icons';
 import './button.css';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,6 +20,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: boolean;
   /** Show right icon */
   rightIcon?: boolean;
+  /** Icon size */
+  iconSize?: 16 | 20 | 24;
   /** Optional legacy label prop for existing stories/components */
   label?: string;
   /** Button contents */
@@ -34,17 +37,23 @@ export const Button = ({
   fullWidth = false,
   leftIcon = true,
   rightIcon = true,
+  iconSize = 20,
   label,
   children,
   className,
   type = 'button',
   disabled,
+  style,
   ...props
 }: ButtonProps) => {
   const legacyVariant = variant === 'ghost' ? 'stroke' : variant;
   const resolvedAccent = primary ? 'primary' : legacyVariant ?? accent;
   const resolvedState = disabled ? 'disabled' : state;
   const content = children ?? label ?? 'Button';
+  const buttonStyle = {
+    ...(style ?? {}),
+    '--button-icon-size': `${iconSize}px`,
+  } as CSSProperties;
 
   return (
     <button
@@ -59,12 +68,13 @@ export const Button = ({
       ]
         .filter(Boolean)
         .join(' ')}
+      style={buttonStyle}
       disabled={resolvedState === 'disabled'}
       {...props}
     >
-      {leftIcon ? <span className="storybook-button__icon" aria-hidden="true" /> : null}
+      {leftIcon ? <PlusIcon containerSize={iconSize} className="storybook-button__icon" /> : null}
       <span className="storybook-button__label">{content}</span>
-      {rightIcon ? <span className="storybook-button__icon" aria-hidden="true" /> : null}
+      {rightIcon ? <PlusIcon containerSize={iconSize} className="storybook-button__icon" /> : null}
     </button>
   );
 };

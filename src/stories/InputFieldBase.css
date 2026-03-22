@@ -13,10 +13,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 100%;
-  flex: 0 0 24px;
-  align-self: stretch;
+  width: var(--input-field-base-icon-size, 24px);
+  height: var(--input-field-base-icon-size, 24px);
+  flex: 0 0 var(--input-field-base-icon-size, 24px);
+  align-self: center;
   margin-right: 8px;
 }
 
@@ -53,6 +53,9 @@
   margin: 0;
   letter-spacing: 0;
   font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input-field-base__label--small {
@@ -112,6 +115,9 @@
   margin: 0;
   opacity: 0;
   pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input-field-base--action .input-field-base__native-input,
