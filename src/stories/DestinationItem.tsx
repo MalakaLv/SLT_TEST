@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './destination-item.css';
 
 export type DestinationItemState = 'enabled' | 'hover' | 'txt-highlight';
@@ -25,13 +27,18 @@ export const DestinationItem = ({
   highlightCount = 0,
   className,
 }: DestinationItemProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const effectiveState: DestinationItemState = state !== 'enabled' ? state : isHovered ? 'hover' : 'enabled';
   const prefix = highlightCount > 0 ? title.slice(0, highlightCount) : '';
   const suffix = highlightCount > 0 ? title.slice(highlightCount) : title;
 
   return (
     <button
       type="button"
-      className={['destination-item', `destination-item--${state}`, className ?? ''].filter(Boolean).join(' ')}
+      className={['destination-item', `destination-item--${effectiveState}`, className ?? ''].filter(Boolean).join(' ')}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <span className="destination-item__main">
         <span className="destination-item__pin" aria-hidden="true">
@@ -49,4 +56,3 @@ export const DestinationItem = ({
     </button>
   );
 };
-
