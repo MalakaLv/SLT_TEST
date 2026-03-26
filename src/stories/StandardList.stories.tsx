@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './Button';
 import { DestinationItem } from './DestinationItem';
 import type { DestinationItemKind, DestinationItemState } from './DestinationItem';
-import { PlusIcon, SearchIcon } from './icons/Icons';
+import { PlusIcon } from './icons/Icons';
 import { StandardList } from './StandardList';
 import './dropdown-field.css';
 import './country-selector.css';
@@ -171,59 +171,30 @@ const CountryListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
 };
 
 const DestinationsListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
-  const [query, setQuery] = useState('');
-
-  const filtered = useMemo(() => {
-    const term = query.trim().toLowerCase();
-    if (!term) {
-      return DESTINATION_OPTIONS;
-    }
-    return DESTINATION_OPTIONS.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(term) ||
-        item.subtitle.toLowerCase().includes(term) ||
-        item.code.toLowerCase().includes(term)
-      );
-    });
-  }, [query]);
-
   return (
     <StandardList<DestinationOption>
-      options={filtered}
+      options={DESTINATION_OPTIONS}
       getOptionValue={(option) => option.id}
       defaultValue="city-par"
       theme={theme}
       visualState="open"
-      className={['standard-list-story', 'standard-list-story--destinations', `standard-list-story--destinations-${theme}`].join(' ')}
+      className={['standard-list-story', 'standard-list-story--destinations'].join(' ')}
       menuClassName="standard-list-story__destinations-menu"
       optionsClassName="standard-list-story__destinations-options"
       optionClassName="standard-list-story__destinations-option"
       renderTrigger={({ triggerProps }) => <HiddenTrigger {...triggerProps} />}
-      renderMenuHeader={() => (
-        <div className="standard-list-story__destinations-search">
-          <SearchIcon containerSize={20} className="standard-list-story__destinations-search-icon" />
-          <input
-            type="text"
-            className="standard-list-story__destinations-search-input"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search destination"
-          />
-        </div>
-      )}
       renderOption={({ option }) => (
         <div>
           {option.showDividerBefore ? <div className="standard-list-story__destinations-divider" /> : null}
           <DestinationItem
             title={option.title}
             subtitle={option.subtitle}
-            code={option.code}
-            kind={option.kind}
-            theme={theme}
-            state={option.state ?? 'enabled'}
-            highlightQuery={query}
-            className="standard-list-story__destinations-item"
-          />
+              code={option.code}
+              kind={option.kind}
+              theme={theme}
+              state={option.state ?? 'enabled'}
+              className="standard-list-story__destinations-item"
+            />
           {option.showFadeAfter ? <div className="standard-list-story__destinations-fade" aria-hidden="true" /> : null}
         </div>
       )}
@@ -301,21 +272,4 @@ export const AdditionalInfoList: Story = {
 export const DestinationsList: Story = {
   name: 'Destinations List',
   render: () => <DestinationsListMenu theme="light" />,
-};
-
-export const DestinationsListDark: Story = {
-  name: 'Destinations List Dark',
-  render: () => <DestinationsListMenu theme="dark" />,
-  decorators: [
-    (StoryComponent: () => React.JSX.Element) => (
-      <div
-        style={{
-          padding: '24px',
-          background: 'linear-gradient(90deg, #1f1f1f 0%, #2e2e2e 100%)',
-        }}
-      >
-        <StoryComponent />
-      </div>
-    ),
-  ],
 };
