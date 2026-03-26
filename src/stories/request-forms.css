@@ -105,3 +105,11 @@
     width: 100%;
   }
 }
+
+@media (max-width: 390px) {
+  .request-forms__destination-menu {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
