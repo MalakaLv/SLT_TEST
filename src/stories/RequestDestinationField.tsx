@@ -27,14 +27,12 @@ export interface RequestDestinationFieldProps {
 
 export const RequestDestinationField = ({ label, ariaLabel }: RequestDestinationFieldProps) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedId, setSelectedId] = useState('city-par');
+  const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const blurTimerRef = useRef<number | null>(null);
   const menuControlsRef = useRef<{ openMenu: () => void; closeMenu: () => void; toggleMenu: () => void } | null>(null);
   const triggerKeyDownRef = useRef<((event: ReactKeyboardEvent<HTMLButtonElement>) => void) | null>(null);
-
-  const selectedOption = DESTINATION_OPTIONS.find((item) => item.id === selectedId);
 
   const filtered = useMemo(() => {
     const term = searchQuery.trim().toLowerCase();
@@ -50,8 +48,8 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
     });
   }, [searchQuery]);
 
-  const shouldOpen = isFocused && searchQuery.trim().length >= 2;
-  const displayValue = inputValue.length > 0 ? inputValue : selectedOption?.title ?? '';
+  const shouldOpen = isFocused && searchQuery.trim().length >= 2 && filtered.length > 0;
+  const displayValue = inputValue;
 
   return (
     <StandardList<DestinationOption>
@@ -87,8 +85,21 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
               onValueChange={(nextValue) => {
                 setInputValue(nextValue);
                 setSearchQuery(nextValue);
+                setSelectedId(undefined);
                 if (nextValue.trim().length >= 2) {
-                  menuControlsRef.current?.openMenu();
+                  const nextTerm = nextValue.trim().toLowerCase();
+                  const hasMatches = DESTINATION_OPTIONS.some((item) => {
+                    return (
+                      item.title.toLowerCase().includes(nextTerm) ||
+                      item.subtitle.toLowerCase().includes(nextTerm) ||
+                      item.code.toLowerCase().includes(nextTerm)
+                    );
+                  });
+                  if (hasMatches) {
+                    menuControlsRef.current?.openMenu();
+                  } else {
+                    menuControlsRef.current?.closeMenu();
+                  }
                 } else {
                   menuControlsRef.current?.closeMenu();
                 }
@@ -99,7 +110,7 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
                   blurTimerRef.current = null;
                 }
                 setIsFocused(true);
-                if (searchQuery.trim().length >= 2) {
+                if (searchQuery.trim().length >= 2 && filtered.length > 0) {
                   menuControlsRef.current?.openMenu();
                 }
               }}
