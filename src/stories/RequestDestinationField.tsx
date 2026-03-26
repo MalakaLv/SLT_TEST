@@ -141,7 +141,8 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
           subtitle={option.subtitle}
           code={option.code}
           kind={option.kind}
-          state={isActive ? 'hover' : 'enabled'}
+          state={isActive ? 'hover' : searchQuery.trim().length > 0 ? 'txt-highlight' : 'enabled'}
+          highlightQuery={searchQuery}
           className="request-forms__destination-item"
         />
       )}
