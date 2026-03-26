@@ -3,13 +3,17 @@ import { useState } from 'react';
 import './destination-item.css';
 
 export type DestinationItemState = 'enabled' | 'hover' | 'txt-highlight';
+export type DestinationItemKind = 'city' | 'airport';
 
 export interface DestinationItemProps {
   title?: string;
   subtitle?: string;
   code?: string;
   state?: DestinationItemState;
+  kind?: DestinationItemKind;
+  theme?: 'light' | 'dark';
   highlightCount?: number;
+  highlightQuery?: string;
   className?: string;
 }
 
@@ -19,34 +23,57 @@ const PinIcon = () => (
   </svg>
 );
 
+const ArrowUpRightIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" className="destination-item__arrow-svg">
+    <path d="M8 16L16 8M10 8H16V14" />
+  </svg>
+);
+
 export const DestinationItem = ({
   title = 'Paris',
   subtitle = 'All locations in this city',
   code = 'PAR',
   state = 'enabled',
+  kind = 'city',
+  theme = 'light',
   highlightCount = 0,
+  highlightQuery,
   className,
 }: DestinationItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const effectiveState: DestinationItemState = state !== 'enabled' ? state : isHovered ? 'hover' : 'enabled';
-  const prefix = highlightCount > 0 ? title.slice(0, highlightCount) : '';
-  const suffix = highlightCount > 0 ? title.slice(highlightCount) : title;
+  const normalized = highlightQuery?.trim().toLowerCase() ?? '';
+  const queryIndex = normalized ? title.toLowerCase().indexOf(normalized) : -1;
+  const rangeStart = queryIndex >= 0 ? queryIndex : 0;
+  const rangeLength = queryIndex >= 0 ? normalized.length : highlightCount;
+  const prefix = rangeLength > 0 ? title.slice(0, rangeStart) : '';
+  const highlight = rangeLength > 0 ? title.slice(rangeStart, rangeStart + rangeLength) : '';
+  const suffix = rangeLength > 0 ? title.slice(rangeStart + rangeLength) : title;
 
   return (
     <button
       type="button"
-      className={['destination-item', `destination-item--${effectiveState}`, className ?? ''].filter(Boolean).join(' ')}
+      className={[
+        'destination-item',
+        `destination-item--${effectiveState}`,
+        `destination-item--${kind}`,
+        `destination-item--${theme}`,
+        className ?? '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="destination-item__main">
         <span className="destination-item__pin" aria-hidden="true">
-          <PinIcon />
+          {kind === 'airport' ? <ArrowUpRightIcon /> : <PinIcon />}
         </span>
         <span className="destination-item__text">
           <span className="destination-item__title">
-            {prefix ? <span className="destination-item__title-highlight">{prefix}</span> : null}
+            {prefix}
+            {highlight ? <span className="destination-item__title-highlight">{highlight}</span> : null}
             <span>{suffix}</span>
           </span>
           <span className="destination-item__subtitle">{subtitle}</span>

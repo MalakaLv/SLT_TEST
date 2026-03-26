@@ -18,6 +18,18 @@
   background: #f6f6f6;
 }
 
+.destination-item--dark {
+  background: #3c3c3c;
+}
+
+.destination-item--dark.destination-item--hover {
+  background: #4a4a4a;
+}
+
+.destination-item--airport {
+  padding-left: 28px;
+}
+
 .destination-item__main {
   flex: 1 1 auto;
   min-width: 0;
@@ -43,8 +55,23 @@
   display: block;
 }
 
-.destination-item__pin-svg path {
+.destination-item__arrow-svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.destination-item__pin-svg path,
+.destination-item__arrow-svg path {
   fill: currentcolor;
+}
+
+.destination-item__arrow-svg path {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .destination-item__text {
@@ -81,4 +108,21 @@
   line-height: 1.5;
   padding: 0 4px;
   flex: 0 0 auto;
+}
+
+.destination-item--dark .destination-item__pin,
+.destination-item--dark .destination-item__code {
+  color: #a0a0a0;
+}
+
+.destination-item--dark .destination-item__title {
+  color: #ffffff;
+}
+
+.destination-item--dark .destination-item__subtitle {
+  color: #d7d7d7;
+}
+
+.destination-item--dark .destination-item__title-highlight {
+  color: var(--slt-brand, #dbb685);
 }
