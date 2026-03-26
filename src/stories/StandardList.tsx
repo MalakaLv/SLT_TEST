@@ -145,6 +145,7 @@ export const StandardList = <T,>({
 
     const updateMenuBounds = () => {
       const menu = menuRef.current;
+      const root = rootRef.current;
       if (!menu) {
         return;
       }
@@ -157,14 +158,32 @@ export const StandardList = <T,>({
 
       requestAnimationFrame(() => {
         const rect = menu.getBoundingClientRect();
+        const formContainer = root?.closest('.request-forms') as HTMLElement | null;
+        const boundaryRect = formContainer?.getBoundingClientRect();
+
+        const boundaryLeft = Math.max(viewportPadding, boundaryRect?.left ?? viewportPadding);
+        const boundaryRight = Math.min(window.innerWidth - viewportPadding, boundaryRect?.right ?? window.innerWidth - viewportPadding);
+
+        const boundaryWidth = Math.max(0, boundaryRight - boundaryLeft);
         let shiftX = 0;
 
-        if (rect.right > window.innerWidth - viewportPadding) {
-          shiftX = window.innerWidth - viewportPadding - rect.right;
+        if (rect.width > boundaryWidth && boundaryWidth > 0) {
+          const width = Math.floor(boundaryWidth);
+          setMenuStyle({
+            ...nextBaseStyle,
+            width: `${width}px`,
+            minWidth: `${width}px`,
+            maxWidth: `${width}px`,
+          });
+          return;
         }
 
-        if (rect.left + shiftX < viewportPadding) {
-          shiftX += viewportPadding - (rect.left + shiftX);
+        if (rect.right > boundaryRight) {
+          shiftX = boundaryRight - rect.right;
+        }
+
+        if (rect.left + shiftX < boundaryLeft) {
+          shiftX += boundaryLeft - (rect.left + shiftX);
         }
 
         setMenuStyle({
