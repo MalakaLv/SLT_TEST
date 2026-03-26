@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { KeyboardEvent, ReactNode } from 'react';
 
 import './standard-list.css';
@@ -79,6 +80,7 @@ export const StandardList = <T,>({
 }: StandardListProps<T>) => {
   const listboxId = useMemo(() => `standard-list-${Math.random().toString(36).slice(2, 10)}`, []);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const isControlled = value !== undefined;
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
@@ -86,6 +88,7 @@ export const StandardList = <T,>({
   const [open, setOpen] = useState(initialOpen || resolvedVisualState === 'open');
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isHovered, setIsHovered] = useState(false);
+  const [menuStyle, setMenuStyle] = useState<CSSProperties | undefined>(undefined);
 
   const selectedValue = isControlled ? value : uncontrolledValue;
   const selectedIndex = useMemo(
@@ -131,6 +134,55 @@ export const StandardList = <T,>({
     window.addEventListener('pointerdown', onPointerDown);
     return () => window.removeEventListener('pointerdown', onPointerDown);
   }, [canInteractiveToggle, effectiveOpen, onOpenChange]);
+
+  useEffect(() => {
+    if (!effectiveOpen) {
+      setMenuStyle(undefined);
+      return;
+    }
+
+    const viewportPadding = 8;
+
+    const updateMenuBounds = () => {
+      const menu = menuRef.current;
+      if (!menu) {
+        return;
+      }
+
+      const nextBaseStyle: CSSProperties = {
+        maxWidth: `calc(100vw - ${viewportPadding * 2}px)`,
+      };
+
+      setMenuStyle(nextBaseStyle);
+
+      requestAnimationFrame(() => {
+        const rect = menu.getBoundingClientRect();
+        let shiftX = 0;
+
+        if (rect.right > window.innerWidth - viewportPadding) {
+          shiftX = window.innerWidth - viewportPadding - rect.right;
+        }
+
+        if (rect.left + shiftX < viewportPadding) {
+          shiftX += viewportPadding - (rect.left + shiftX);
+        }
+
+        setMenuStyle({
+          ...nextBaseStyle,
+          transform: `translateX(${Math.round(shiftX)}px)`,
+        });
+      });
+    };
+
+    updateMenuBounds();
+    window.addEventListener('resize', updateMenuBounds);
+    window.addEventListener('scroll', updateMenuBounds, true);
+
+    return () => {
+      window.removeEventListener('resize', updateMenuBounds);
+      window.removeEventListener('scroll', updateMenuBounds, true);
+    };
+  }, [effectiveOpen]);
 
   const updateOpen = (nextOpen: boolean) => {
     if (!canInteractiveToggle) {
@@ -237,7 +289,13 @@ export const StandardList = <T,>({
       })}
 
       {effectiveOpen ? (
-        <div id={listboxId} role="listbox" className={['standard-list__menu', menuClassName ?? ''].filter(Boolean).join(' ')}>
+        <div
+          id={listboxId}
+          role="listbox"
+          ref={menuRef}
+          style={menuStyle}
+          className={['standard-list__menu', menuClassName ?? ''].filter(Boolean).join(' ')}
+        >
           {renderMenuHeader ? renderMenuHeader() : null}
           <div className={['standard-list__options', optionsClassName ?? ''].filter(Boolean).join(' ')}>
             {options.map((option, index) => {
