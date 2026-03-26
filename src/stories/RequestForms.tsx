@@ -2,6 +2,7 @@ import { Button } from './Button';
 import { DropdownButton } from './complex-components/DropdownButton';
 import { InputField } from './InputField';
 import { PhoneInputField } from './PhoneInputField';
+import { RequestDestinationField } from './RequestDestinationField';
 import './request-forms.css';
 
 export interface RequestFormsProps {
@@ -40,10 +41,10 @@ export const RequestForms = ({
 
       <div className="request-forms__row">
         <div className="request-forms__cell">
-          <InputField label={fromLabel} state="default" showIcon={false} />
+          <RequestDestinationField label={fromLabel} ariaLabel="From destination" />
         </div>
         <div className="request-forms__cell">
-          <InputField label={toLabel} state="default" showIcon={false} />
+          <RequestDestinationField label={toLabel} ariaLabel="To destination" />
         </div>
       </div>
 

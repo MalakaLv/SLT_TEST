@@ -9,6 +9,11 @@ type RenderTriggerArgs<T> = {
   open: boolean;
   selectedOption: T | undefined;
   stateClass: StandardListState;
+  menuControls: {
+    openMenu: () => void;
+    closeMenu: () => void;
+    toggleMenu: () => void;
+  };
   triggerProps: {
     type: 'button';
     disabled: boolean;
@@ -214,6 +219,11 @@ export const StandardList = <T,>({
         open: effectiveOpen,
         selectedOption,
         stateClass,
+        menuControls: {
+          openMenu: () => updateOpen(true),
+          closeMenu: () => updateOpen(false),
+          toggleMenu: () => updateOpen(!effectiveOpen),
+        },
         triggerProps: {
           type: 'button',
           disabled: visualDisabled,

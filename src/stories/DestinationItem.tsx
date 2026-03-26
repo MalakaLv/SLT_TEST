@@ -17,6 +17,7 @@ export interface DestinationItemProps {
   highlightCount?: number;
   highlightQuery?: string;
   iconSize?: IconSize;
+  as?: 'button' | 'div';
   className?: string;
 }
 
@@ -30,6 +31,7 @@ export const DestinationItem = ({
   highlightCount = 0,
   highlightQuery,
   iconSize = 24,
+  as = 'button',
   className,
 }: DestinationItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -43,18 +45,49 @@ export const DestinationItem = ({
   const highlight = rangeLength > 0 ? title.slice(rangeStart, rangeStart + rangeLength) : '';
   const suffix = rangeLength > 0 ? title.slice(rangeStart + rangeLength) : title;
 
+  const classes = [
+    'destination-item',
+    `destination-item--${effectiveState}`,
+    `destination-item--${kind}`,
+    `destination-item--${theme}`,
+    className ?? '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  if (as === 'div') {
+    return (
+      <div className={classes} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <span className="destination-item__main">
+          <span
+            className="destination-item__pin"
+            aria-hidden="true"
+            style={{ width: iconSize, height: iconSize, flexBasis: iconSize }}
+          >
+            {kind === 'airport' ? (
+              <ArrowUpRightIcon containerSize={iconSize} className="destination-item__icon" />
+            ) : (
+              <PinIcon containerSize={iconSize} className="destination-item__icon" />
+            )}
+          </span>
+          <span className="destination-item__text">
+            <span className="destination-item__title">
+              {prefix}
+              {highlight ? <span className="destination-item__title-highlight">{highlight}</span> : null}
+              <span>{suffix}</span>
+            </span>
+            <span className="destination-item__subtitle">{subtitle}</span>
+          </span>
+        </span>
+        <span className="destination-item__code">{code}</span>
+      </div>
+    );
+  }
+
   return (
     <button
       type="button"
-      className={[
-        'destination-item',
-        `destination-item--${effectiveState}`,
-        `destination-item--${kind}`,
-        `destination-item--${theme}`,
-        className ?? '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+      className={classes}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
