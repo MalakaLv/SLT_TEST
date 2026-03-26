@@ -36,7 +36,6 @@ type DestinationOption = {
   kind: DestinationItemKind;
   state?: DestinationItemState;
   showDividerBefore?: boolean;
-  showFadeAfter?: boolean;
 };
 
 const TRIP_OPTIONS: TripOption[] = [
@@ -55,7 +54,7 @@ const COUNTRY_OPTIONS: CountryOption[] = [
 const DESTINATION_OPTIONS: DestinationOption[] = [
   { id: 'city-par', title: 'Paris', subtitle: 'All locations in this city', code: 'PAR', kind: 'city' },
   { id: 'apt-cdg', title: 'Paris Charles de Gaulle', subtitle: 'France', code: 'CDG', kind: 'airport' },
-  { id: 'apt-ory', title: 'Paris Orly', subtitle: 'France', code: 'ORY', kind: 'airport', state: 'hover' },
+  { id: 'apt-ory', title: 'Paris Orly', subtitle: 'France', code: 'ORY', kind: 'airport' },
   { id: 'apt-bva', title: 'Paris Beauvais', subtitle: 'France', code: 'BVA', kind: 'airport' },
   {
     id: 'city-us-par',
@@ -71,7 +70,6 @@ const DESTINATION_OPTIONS: DestinationOption[] = [
     subtitle: 'France',
     code: 'CDG',
     kind: 'airport',
-    showFadeAfter: true,
   },
 ];
 
@@ -171,6 +169,8 @@ const CountryListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
 };
 
 const DestinationsListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
+  const [hoveredDestinationId, setHoveredDestinationId] = useState<string | null>(null);
+
   return (
     <StandardList<DestinationOption>
       options={DESTINATION_OPTIONS}
@@ -184,18 +184,17 @@ const DestinationsListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
       optionClassName="standard-list-story__destinations-option"
       renderTrigger={({ triggerProps }) => <HiddenTrigger {...triggerProps} />}
       renderOption={({ option }) => (
-        <div>
+        <div onMouseEnter={() => setHoveredDestinationId(option.id)} onMouseLeave={() => setHoveredDestinationId(null)}>
           {option.showDividerBefore ? <div className="standard-list-story__destinations-divider" /> : null}
           <DestinationItem
             title={option.title}
             subtitle={option.subtitle}
-              code={option.code}
-              kind={option.kind}
-              theme={theme}
-              state={option.state ?? 'enabled'}
-              className="standard-list-story__destinations-item"
-            />
-          {option.showFadeAfter ? <div className="standard-list-story__destinations-fade" aria-hidden="true" /> : null}
+            code={option.code}
+            kind={option.kind}
+            theme={theme}
+            state={hoveredDestinationId === option.id ? 'hover' : option.state ?? 'enabled'}
+            className="standard-list-story__destinations-item"
+          />
         </div>
       )}
     />
