@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { ArrowUpRightIcon, PinIcon } from './icons/Icons';
+import type { IconSize } from './icons/Icons';
 import './destination-item.css';
 
 export type DestinationItemState = 'enabled' | 'hover' | 'txt-highlight';
@@ -14,20 +16,9 @@ export interface DestinationItemProps {
   theme?: 'light' | 'dark';
   highlightCount?: number;
   highlightQuery?: string;
+  iconSize?: IconSize;
   className?: string;
 }
-
-const PinIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" className="destination-item__pin-svg">
-    <path d="M12 2C8.96 2 6.5 4.46 6.5 7.5C6.5 11.71 12 20.5 12 20.5C12 20.5 17.5 11.71 17.5 7.5C17.5 4.46 15.04 2 12 2ZM12 10C10.62 10 9.5 8.88 9.5 7.5C9.5 6.12 10.62 5 12 5C13.38 5 14.5 6.12 14.5 7.5C14.5 8.88 13.38 10 12 10Z" />
-  </svg>
-);
-
-const ArrowUpRightIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" className="destination-item__arrow-svg">
-    <path d="M8 16L16 8M10 8H16V14" />
-  </svg>
-);
 
 export const DestinationItem = ({
   title = 'Paris',
@@ -38,6 +29,7 @@ export const DestinationItem = ({
   theme = 'light',
   highlightCount = 0,
   highlightQuery,
+  iconSize = 24,
   className,
 }: DestinationItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -67,8 +59,16 @@ export const DestinationItem = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <span className="destination-item__main">
-        <span className="destination-item__pin" aria-hidden="true">
-          {kind === 'airport' ? <ArrowUpRightIcon /> : <PinIcon />}
+        <span
+          className="destination-item__pin"
+          aria-hidden="true"
+          style={{ width: iconSize, height: iconSize, flexBasis: iconSize }}
+        >
+          {kind === 'airport' ? (
+            <ArrowUpRightIcon containerSize={iconSize} className="destination-item__icon" />
+          ) : (
+            <PinIcon containerSize={iconSize} className="destination-item__icon" />
+          )}
         </span>
         <span className="destination-item__text">
           <span className="destination-item__title">
