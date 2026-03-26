@@ -169,11 +169,13 @@ export const StandardList = <T,>({
 
         if (rect.width > boundaryWidth && boundaryWidth > 0) {
           const width = Math.floor(boundaryWidth);
+          const shiftToBoundary = Math.round(boundaryLeft - rect.left);
           setMenuStyle({
             ...nextBaseStyle,
             width: `${width}px`,
             minWidth: `${width}px`,
             maxWidth: `${width}px`,
+            transform: `translateX(${shiftToBoundary}px)`,
           });
           return;
         }
