@@ -34,21 +34,9 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
   const menuControlsRef = useRef<{ openMenu: () => void; closeMenu: () => void; toggleMenu: () => void } | null>(null);
   const triggerKeyDownRef = useRef<((event: ReactKeyboardEvent<HTMLButtonElement>) => void) | null>(null);
 
-  const filtered = useMemo(() => {
-    const term = searchQuery.trim().toLowerCase();
-    if (!term) {
-      return DESTINATION_OPTIONS;
-    }
-    return DESTINATION_OPTIONS.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(term) ||
-        item.subtitle.toLowerCase().includes(term) ||
-        item.code.toLowerCase().includes(term)
-      );
-    });
-  }, [searchQuery]);
+  const filtered = useMemo(() => DESTINATION_OPTIONS, []);
 
-  const shouldOpen = isFocused && searchQuery.trim().length >= 2 && filtered.length > 0;
+  const shouldOpen = isFocused && inputValue.trim().length > 0;
   const displayValue = inputValue;
 
   return (
@@ -86,20 +74,8 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
                 setInputValue(nextValue);
                 setSearchQuery(nextValue);
                 setSelectedId(undefined);
-                if (nextValue.trim().length >= 2) {
-                  const nextTerm = nextValue.trim().toLowerCase();
-                  const hasMatches = DESTINATION_OPTIONS.some((item) => {
-                    return (
-                      item.title.toLowerCase().includes(nextTerm) ||
-                      item.subtitle.toLowerCase().includes(nextTerm) ||
-                      item.code.toLowerCase().includes(nextTerm)
-                    );
-                  });
-                  if (hasMatches) {
-                    menuControlsRef.current?.openMenu();
-                  } else {
-                    menuControlsRef.current?.closeMenu();
-                  }
+                if (nextValue.trim().length > 0) {
+                  menuControlsRef.current?.openMenu();
                 } else {
                   menuControlsRef.current?.closeMenu();
                 }
@@ -110,7 +86,7 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
                   blurTimerRef.current = null;
                 }
                 setIsFocused(true);
-                if (searchQuery.trim().length >= 2 && filtered.length > 0) {
+                if (inputValue.trim().length > 0) {
                   menuControlsRef.current?.openMenu();
                 }
               }}
