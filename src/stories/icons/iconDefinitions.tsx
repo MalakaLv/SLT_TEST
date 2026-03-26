@@ -1,11 +1,13 @@
 import type { CSSProperties, ReactElement } from 'react';
 
 import {
+  ArrowUpRightIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   ClearIcon,
   ErrorIcon,
+  PinIcon,
   PlusIcon,
   SearchIcon,
   SuccessIcon,
@@ -60,6 +62,14 @@ export const ICON_DEFINITIONS: IconDefinition[] = [
   {
     label: 'Success Check Circle',
     render: (size) => <SuccessIcon containerSize={size} />,
+  },
+  {
+    label: 'Pin/Location',
+    render: (size) => <PinIcon containerSize={size} />,
+  },
+  {
+    label: 'Arrow Up Right',
+    render: (size) => <ArrowUpRightIcon containerSize={size} />,
   },
   {
     label: 'Search',
