@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
-
+import { useMemo, useRef, useState } from 'react';
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { DestinationItem } from './DestinationItem';
-import { SearchIcon } from './icons/Icons';
+import { InputField } from './InputField';
 import { StandardList } from './StandardList';
 import './request-forms.css';
 
@@ -26,10 +26,18 @@ export interface RequestDestinationFieldProps {
 }
 
 export const RequestDestinationField = ({ label, ariaLabel }: RequestDestinationFieldProps) => {
-  const [query, setQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedId, setSelectedId] = useState('city-par');
+  const [inputValue, setInputValue] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const blurTimerRef = useRef<number | null>(null);
+  const menuControlsRef = useRef<{ openMenu: () => void; closeMenu: () => void; toggleMenu: () => void } | null>(null);
+  const triggerKeyDownRef = useRef<((event: ReactKeyboardEvent<HTMLButtonElement>) => void) | null>(null);
+
+  const selectedOption = DESTINATION_OPTIONS.find((item) => item.id === selectedId);
 
   const filtered = useMemo(() => {
-    const term = query.trim().toLowerCase();
+    const term = searchQuery.trim().toLowerCase();
     if (!term) {
       return DESTINATION_OPTIONS;
     }
@@ -40,13 +48,16 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
         item.code.toLowerCase().includes(term)
       );
     });
-  }, [query]);
+  }, [searchQuery]);
+
+  const shouldOpen = isFocused && searchQuery.trim().length >= 2;
+  const displayValue = inputValue.length > 0 ? inputValue : selectedOption?.title ?? '';
 
   return (
     <StandardList<DestinationOption>
       options={filtered}
       getOptionValue={(option) => option.id}
-      defaultValue="city-par"
+      value={selectedId}
       className="request-forms__destination"
       menuClassName="request-forms__destination-menu"
       optionsClassName="request-forms__destination-options"
@@ -54,32 +65,64 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
       optionActiveClassName="request-forms__destination-option--active"
       optionSelectedClassName="request-forms__destination-option--selected"
       ariaLabel={ariaLabel}
-      renderTrigger={({ selectedOption, triggerProps, menuControls }) => (
-        <button
-          {...triggerProps}
-          className="request-forms__destination-trigger"
-          onClick={(event) => {
-            event.preventDefault();
-            menuControls.openMenu();
-          }}
-          onFocus={() => menuControls.openMenu()}
-        >
-          <span className="request-forms__destination-trigger-label">{label}</span>
-          <span className="request-forms__destination-trigger-value">{selectedOption?.title ?? ''}</span>
-        </button>
-      )}
-      renderMenuHeader={() => (
-        <div className="request-forms__destination-search">
-          <SearchIcon containerSize={20} className="request-forms__destination-search-icon" />
-          <input
-            type="text"
-            className="request-forms__destination-search-input"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search destination"
-          />
-        </div>
-      )}
+      visualState={shouldOpen ? 'open' : 'default'}
+      onChange={(nextId, option) => {
+        setSelectedId(nextId);
+        setInputValue(option.title);
+        setSearchQuery('');
+        setIsFocused(false);
+      }}
+      renderTrigger={({ triggerProps, menuControls }) => {
+        menuControlsRef.current = menuControls;
+        triggerKeyDownRef.current = triggerProps.onKeyDown;
+
+        return (
+          <div className="request-forms__destination-trigger-wrap">
+            <InputField
+              className="request-forms__destination-input"
+              label={label}
+              state="default"
+              showIcon={false}
+              value={displayValue}
+              onValueChange={(nextValue) => {
+                setInputValue(nextValue);
+                setSearchQuery(nextValue);
+                if (nextValue.trim().length >= 2) {
+                  menuControlsRef.current?.openMenu();
+                } else {
+                  menuControlsRef.current?.closeMenu();
+                }
+              }}
+              onInputFocus={() => {
+                if (blurTimerRef.current !== null) {
+                  window.clearTimeout(blurTimerRef.current);
+                  blurTimerRef.current = null;
+                }
+                setIsFocused(true);
+                if (searchQuery.trim().length >= 2) {
+                  menuControlsRef.current?.openMenu();
+                }
+              }}
+              onInputBlur={() => {
+                blurTimerRef.current = window.setTimeout(() => {
+                  setIsFocused(false);
+                }, 120);
+              }}
+              onInputKeyDown={(event) => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === 'Escape') {
+                  triggerKeyDownRef.current?.(event as unknown as ReactKeyboardEvent<HTMLButtonElement>);
+                }
+              }}
+            />
+            <button
+              {...triggerProps}
+              className="request-forms__destination-hidden-trigger"
+              tabIndex={-1}
+              aria-hidden="true"
+            />
+          </div>
+        );
+      }}
       renderOption={({ option, isActive }) => (
         <DestinationItem
           as="div"
@@ -94,4 +137,3 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
     />
   );
 };
-

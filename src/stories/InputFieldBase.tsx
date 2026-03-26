@@ -1,4 +1,5 @@
 import type { CSSProperties, RefObject } from 'react';
+import type { KeyboardEvent } from 'react';
 
 import { PlusIcon as SharedPlusIcon } from './icons/Icons';
 import './InputFieldBase.css';
@@ -14,6 +15,7 @@ export interface InputFieldBaseProps {
   onInputFocus?: () => void;
   onInputBlur?: () => void;
   onInputChange?: (value: string) => void;
+  onInputKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   inputDisabled?: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
   iconSize?: 16 | 20 | 24;
@@ -44,6 +46,7 @@ export const InputFieldBase = ({
   onInputFocus,
   onInputBlur,
   onInputChange,
+  onInputKeyDown,
   inputDisabled = false,
   inputRef,
   iconSize = 24,
@@ -90,6 +93,7 @@ export const InputFieldBase = ({
           onFocus={onInputFocus}
           onBlur={onInputBlur}
           onChange={(e) => onInputChange?.(e.target.value)}
+          onKeyDown={onInputKeyDown}
         />
       </div>
     </div>

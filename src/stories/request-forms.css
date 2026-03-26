@@ -40,7 +40,8 @@
 .request-forms .dropdown-field__trigger,
 .request-forms .complex-dropdown-button__trigger,
 .request-forms .request-forms__destination,
-.request-forms .request-forms__destination-trigger,
+.request-forms .request-forms__destination-trigger-wrap,
+.request-forms .request-forms__destination-input,
 .request-forms .input-field,
 .request-forms .phone-input-field {
   width: 100%;
@@ -50,43 +51,12 @@
   position: relative;
 }
 
-.request-forms__destination-trigger {
-  width: 100%;
-  min-height: 48px;
-  box-sizing: border-box;
-  border: 1px solid #b7b7b7;
-  background: #ffffff;
-  padding: 4px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: left;
-  cursor: text;
-  font-family: Inter, 'Segoe UI', Arial, sans-serif;
-}
-
-.request-forms__destination-trigger:focus-visible {
-  outline: 2px solid var(--slt-black);
-  outline-offset: -2px;
-}
-
-.request-forms__destination-trigger-label {
-  color: #767676;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-.request-forms__destination-trigger-value {
-  color: var(--slt-black);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+.request-forms__destination-hidden-trigger {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .request-forms__destination-menu {
@@ -100,42 +70,13 @@
   z-index: 30;
 }
 
-.request-forms__destination-search {
-  width: 100%;
-  height: 48px;
-  box-sizing: border-box;
-  border: 1px solid #b7b7b7;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 12px 0 16px;
-  margin-bottom: 8px;
-}
-
-.request-forms__destination-search-icon {
-  color: #767676;
-}
-
-.request-forms__destination-search-input {
-  flex: 1 1 auto;
-  min-width: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  color: var(--slt-black);
-  font-family: Inter, 'Segoe UI', Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  padding: 0;
-}
-
-.request-forms__destination-search-input::placeholder {
-  color: #767676;
-}
-
 .request-forms__destination-option {
   padding: 0;
+}
+
+.request-forms__destination-option--selected,
+.request-forms__destination-option--active {
+  background: transparent;
 }
 
 .request-forms__destination-item {

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import type { CSSProperties, MouseEvent } from 'react';
+import type { CSSProperties, KeyboardEvent, MouseEvent } from 'react';
 
 import { ClearIcon, ErrorIcon } from './icons/Icons';
 import { InputFieldBase } from './InputFieldBase';
@@ -17,6 +17,10 @@ export interface InputFieldProps {
   className?: string;
   iconSize?: 16 | 20 | 24;
   showIcon?: boolean;
+  onValueChange?: (value: string) => void;
+  onInputFocus?: () => void;
+  onInputBlur?: () => void;
+  onInputKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export const InputField = ({
@@ -31,11 +35,16 @@ export const InputField = ({
   className,
   iconSize = 24,
   showIcon = true,
+  onValueChange,
+  onInputFocus,
+  onInputBlur,
+  onInputKeyDown,
 }: InputFieldProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState(defaultValue);
+  const isValueControlled = value !== undefined;
 
   const hasExplicitState = state !== 'default';
   const internalState: InputFieldProps['state'] = isFocused
@@ -53,7 +62,7 @@ export const InputField = ({
   const isFocusedVisual = effectiveState === 'focused';
   const isFilled = effectiveState === 'filled';
   const isDisabled = effectiveState === 'disabled';
-  const inputDisplayValue = hasExplicitState ? value : inputValue;
+  const inputDisplayValue = isValueControlled ? value : inputValue;
   const resolvedValue = hasExplicitState && effectiveState === 'filled' ? inputText : (inputDisplayValue ?? '');
   const forwardedInputValue =
     hasExplicitState && effectiveState === 'filled' ? undefined : (inputDisplayValue ?? '');
@@ -115,13 +124,19 @@ export const InputField = ({
           inputRef={inputRef}
           onInputFocus={() => {
             setIsFocused(true);
+            onInputFocus?.();
           }}
           onInputBlur={() => {
             setIsFocused(false);
+            onInputBlur?.();
           }}
           onInputChange={(nextValue) => {
-            setInputValue(nextValue);
+            if (!isValueControlled) {
+              setInputValue(nextValue);
+            }
+            onValueChange?.(nextValue);
           }}
+          onInputKeyDown={onInputKeyDown}
           showIcon={showIcon}
           iconSize={iconSize}
           className="input-field__base"
