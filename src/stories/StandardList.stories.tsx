@@ -73,6 +73,8 @@ const DESTINATION_OPTIONS: DestinationOption[] = [
   },
 ];
 
+const ADDITIONAL_INFO_PLACEHOLDER = [{ value: 'additional-info', label: 'Additional Info' }];
+
 const HiddenTrigger = (props: {
   type: 'button';
   disabled: boolean;
@@ -201,49 +203,96 @@ const DestinationsListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
   );
 };
 
-const AdditionalInfoListPanel = () => (
-  <div className="standard-list-story__additional-info">
-    <section className="standard-list-story__section">
-      <h3 className="standard-list-story__title">Travelers</h3>
-      <div className="standard-list-story__traveler-row">
-        <p className="standard-list-story__label">Passenger</p>
-        <div className="standard-list-story__counter">
-          <button type="button" className="standard-list-story__icon-button" aria-label="Decrease passenger count">
-            <span className="standard-list-story__minus-icon" aria-hidden="true" />
-          </button>
-          <span className="standard-list-story__counter-value">1</span>
-          <button type="button" className="standard-list-story__icon-button" aria-label="Increase passenger count">
-            <PlusIcon containerSize={20} className="standard-list-story__plus-icon" />
-          </button>
-        </div>
-      </div>
-    </section>
+const AdditionalInfoListMenu = ({ theme = 'light' }: MenuOnlyProps) => {
+  const [passengers, setPassengers] = useState(1);
+  const [cabin, setCabin] = useState<'business' | 'first' | 'premium'>('business');
 
-    <div className="standard-list-story__divider" aria-hidden="true" />
+  return (
+    <StandardList<{ value: string; label: string }>
+      options={ADDITIONAL_INFO_PLACEHOLDER}
+      getOptionValue={(option) => option.value}
+      defaultValue="additional-info"
+      theme={theme}
+      visualState="open"
+      className="standard-list-story standard-list-story--additional-info"
+      menuClassName="standard-list-story__additional-info"
+      optionsClassName="standard-list-story__options--empty"
+      renderTrigger={({ triggerProps }) => <HiddenTrigger {...triggerProps} />}
+      renderMenuHeader={() => (
+        <>
+          <section className="standard-list-story__section">
+            <h3 className="standard-list-story__title">Travelers</h3>
+            <div className="standard-list-story__traveler-row">
+              <p className="standard-list-story__label">Passenger</p>
+              <div className="standard-list-story__counter">
+                <button
+                  type="button"
+                  className="standard-list-story__icon-button"
+                  aria-label="Decrease passenger count"
+                  onClick={() => setPassengers((prev) => Math.max(1, prev - 1))}
+                >
+                  <span className="standard-list-story__minus-icon" aria-hidden="true" />
+                </button>
+                <span className="standard-list-story__counter-value">{passengers}</span>
+                <button
+                  type="button"
+                  className="standard-list-story__icon-button"
+                  aria-label="Increase passenger count"
+                  onClick={() => setPassengers((prev) => Math.min(9, prev + 1))}
+                >
+                  <PlusIcon containerSize={20} className="standard-list-story__plus-icon" />
+                </button>
+              </div>
+            </div>
+          </section>
 
-    <section className="standard-list-story__section">
-      <h3 className="standard-list-story__title">Cabin Class</h3>
-      <div className="standard-list-story__chips">
-        <button type="button" className="standard-list-story__chip standard-list-story__chip--selected">
-          Business Class
-        </button>
-        <button type="button" className="standard-list-story__chip">
-          First Class
-        </button>
-        <button type="button" className="standard-list-story__chip">
-          Premium Economy
-        </button>
-      </div>
-    </section>
+          <div className="standard-list-story__divider" aria-hidden="true" />
 
-    <Button leftIcon={false} rightIcon={false} fullWidth className="standard-list-story__done-button">
-      Done
-    </Button>
-  </div>
-);
+          <section className="standard-list-story__section">
+            <h3 className="standard-list-story__title">Cabin Class</h3>
+            <div className="standard-list-story__chips">
+              <button
+                type="button"
+                className={['standard-list-story__chip', cabin === 'business' ? 'standard-list-story__chip--selected' : '']
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={() => setCabin('business')}
+              >
+                Business Class
+              </button>
+              <button
+                type="button"
+                className={['standard-list-story__chip', cabin === 'first' ? 'standard-list-story__chip--selected' : '']
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={() => setCabin('first')}
+              >
+                First Class
+              </button>
+              <button
+                type="button"
+                className={['standard-list-story__chip', cabin === 'premium' ? 'standard-list-story__chip--selected' : '']
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={() => setCabin('premium')}
+              >
+                Premium Economy
+              </button>
+            </div>
+          </section>
+
+          <Button leftIcon={false} rightIcon={false} fullWidth className="standard-list-story__done-button">
+            Done
+          </Button>
+        </>
+      )}
+      renderOption={() => null}
+    />
+  );
+};
 
 const meta = {
-  title: 'Components/StandardList',
+  title: 'Base Components/StandardList',
   component: DefaultListMenu,
   parameters: {
     layout: 'centered',
@@ -265,7 +314,7 @@ export const CountryList: Story = {
 
 export const AdditionalInfoList: Story = {
   name: 'Additional Info List',
-  render: () => <AdditionalInfoListPanel />,
+  render: () => <AdditionalInfoListMenu theme="light" />,
 };
 
 export const DestinationsList: Story = {

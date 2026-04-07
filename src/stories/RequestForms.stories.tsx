@@ -18,6 +18,7 @@ const meta = {
     emailLabel: 'E-mail*',
     nameLabel: 'Name',
     submitLabel: 'Get A Free Quotes',
+    agentBlockVariant: '390',
   },
 } satisfies Meta<typeof RequestForms>;
 
@@ -29,6 +30,9 @@ export const Default: Story = {};
 
 export const Mobile320: Story = {
   name: 'Mobile 320px',
+  args: {
+    agentBlockVariant: '320',
+  },
   decorators: [
     (Story) => (
       <div
@@ -36,6 +40,8 @@ export const Mobile320: Story = {
           width: '320px',
           height: 'auto',
           overflow: 'visible',
+          padding: '0 16px',
+          boxSizing: 'border-box',
         }}
       >
         <Story />
@@ -46,6 +52,9 @@ export const Mobile320: Story = {
 
 export const Mobile390: Story = {
   name: 'Mobile 390px',
+  args: {
+    agentBlockVariant: '390',
+  },
   decorators: [
     (Story) => (
       <div
@@ -53,6 +62,8 @@ export const Mobile390: Story = {
           width: '390px',
           height: 'auto',
           overflow: 'visible',
+          padding: '0 16px',
+          boxSizing: 'border-box',
         }}
       >
         <Story />
@@ -61,13 +72,16 @@ export const Mobile390: Story = {
   ],
 };
 
-export const Mobile490: Story = {
-  name: 'Mobile 490px',
+export const Mobile448: Story = {
+  name: 'Mobile 448px',
+  args: {
+    agentBlockVariant: '390',
+  },
   decorators: [
     (Story) => (
       <div
         style={{
-          width: '490px',
+          width: '448px',
           height: 'auto',
           overflow: 'visible',
         }}

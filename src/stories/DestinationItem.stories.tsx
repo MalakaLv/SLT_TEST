@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DestinationItem } from './DestinationItem';
 
 const meta = {
-  title: 'Components/Destination Item',
+  title: 'Base Components/Destination Item',
   component: DestinationItem,
   parameters: {
     layout: 'centered',

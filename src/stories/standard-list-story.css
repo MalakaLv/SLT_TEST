@@ -15,6 +15,10 @@
   width: 236px;
 }
 
+.standard-list-story__options--empty {
+  display: none;
+}
+
 .standard-list-story--country .standard-list-story__menu {
   width: 320px;
 }

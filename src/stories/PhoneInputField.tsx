@@ -138,7 +138,11 @@ export const PhoneInputField = ({
   };
 
   return (
-    <div className={['phone-input-field', `phone-input-field--${theme}`, className ?? ''].filter(Boolean).join(' ')}>
+    <div
+      className={['phone-input-field', `phone-input-field--${theme}`, isError ? 'phone-input-field--error' : '', className ?? '']
+        .filter(Boolean)
+        .join(' ')}
+    >
       <div
         className={[
           'phone-input-field__row',

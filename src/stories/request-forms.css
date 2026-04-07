@@ -1,9 +1,52 @@
+.request-forms-layout {
+  width: min(100%, 448px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
 .request-forms {
-  width: min(100%, 760px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
   box-sizing: border-box;
+}
+
+.request-forms__agent-block {
+  width: 100%;
+  max-width: none;
+}
+
+.request-forms__separator {
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.request-forms__separator-line {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 1px;
+  background: #d7d7d7;
+}
+
+.request-forms__separator-text {
+  flex: 0 0 auto;
+  color: #949494;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .request-forms__row {
@@ -11,6 +54,14 @@
   display: flex;
   gap: 8px;
   align-items: start;
+}
+
+.request-forms__row--dropdowns {
+  justify-content: flex-start;
+}
+
+.request-forms__row--dropdowns .request-forms__cell {
+  min-width: 0;
 }
 
 .request-forms__row--single {
@@ -45,6 +96,26 @@
 .request-forms .input-field,
 .request-forms .phone-input-field {
   width: 100%;
+}
+
+.request-forms__dropdown-button--text-only {
+  max-width: none;
+}
+
+.request-forms__dropdown-button--info {
+  width: 100%;
+  max-width: 327px;
+}
+
+.request-forms__cell--dropdown-text {
+  flex: 0 0 113px;
+  max-width: 113px;
+}
+
+.request-forms__cell--dropdown-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 327px;
 }
 
 .request-forms__destination {
@@ -92,9 +163,13 @@
   margin-top: 4px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 448px) {
   .request-forms__row {
     flex-direction: column;
+  }
+
+  .request-forms__row--dropdowns {
+    flex-direction: row;
   }
 
   .request-forms__actions {
@@ -107,6 +182,14 @@
 }
 
 @media (max-width: 390px) {
+  .request-forms-layout {
+    padding: 0 16px;
+  }
+
+  .request-forms__separator {
+    padding: 0;
+  }
+
   .request-forms__destination-menu {
     width: 100%;
     min-width: 0;

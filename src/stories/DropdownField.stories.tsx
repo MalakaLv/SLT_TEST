@@ -5,7 +5,7 @@ import { fn } from 'storybook/test';
 import { DropdownField } from './DropdownField';
 
 const meta = {
-  title: 'Components/DropdownField',
+  title: 'Base Components/DropdownField',
   component: DropdownField,
   parameters: {
     layout: 'centered',

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputFieldBase } from './InputFieldBase';
 
 const meta = {
-  title: 'Components/InputFieldBase',
+  title: 'Base Components/InputFieldBase',
   component: InputFieldBase,
   parameters: {
     layout: 'centered',

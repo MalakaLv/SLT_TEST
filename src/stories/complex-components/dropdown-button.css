@@ -139,16 +139,39 @@
   background: #eeeeee;
 }
 
-.complex-dropdown-button__trigger--light .complex-dropdown-button__label,
-.complex-dropdown-button__trigger--light .complex-dropdown-button__prefix,
-.complex-dropdown-button__trigger--light .complex-dropdown-button__icon {
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__label,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__pipe,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon {
+  color: #5a5a5a;
+}
+
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon--user svg,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon--user svg path,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon--user svg,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon--user svg path {
+  fill: #5a5a5a;
+}
+
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--hover .complex-dropdown-button__label,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--hover .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--hover .complex-dropdown-button__icon,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--open .complex-dropdown-button__label,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--open .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--open .complex-dropdown-button__icon,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--open .complex-dropdown-button__pipe {
   color: #272727;
+}
+
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--hover .complex-dropdown-button__pipe {
+  color: #b7b7b7;
 }
 
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__label,
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__pipe,
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--enabled .complex-dropdown-button__icon {
-  color: #d7d7d7;
+  color: #5a5a5a;
 }
 
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--hover .complex-dropdown-button__label,
@@ -158,6 +181,17 @@
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--open .complex-dropdown-button__prefix,
 .complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--open .complex-dropdown-button__icon {
   color: #ffffff;
+}
+
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--disabled .complex-dropdown-button__label,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--disabled .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--disabled .complex-dropdown-button__pipe,
+.complex-dropdown-button__trigger--light.complex-dropdown-button__trigger--disabled .complex-dropdown-button__icon,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--disabled .complex-dropdown-button__label,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--disabled .complex-dropdown-button__prefix,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--disabled .complex-dropdown-button__pipe,
+.complex-dropdown-button__trigger--dark.complex-dropdown-button__trigger--disabled .complex-dropdown-button__icon {
+  color: #d7d7d7;
 }
 
 .complex-dropdown-button__trigger--disabled {

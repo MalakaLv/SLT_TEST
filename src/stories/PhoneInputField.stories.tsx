@@ -5,7 +5,7 @@ import { fn } from 'storybook/test';
 import { PhoneInputField } from './PhoneInputField';
 
 const meta = {
-  title: 'Components/PhoneInputField',
+  title: 'Base Components/PhoneInputField',
   component: PhoneInputField,
   parameters: {
     layout: 'centered',

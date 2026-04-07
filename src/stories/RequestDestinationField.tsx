@@ -23,9 +23,10 @@ const DESTINATION_OPTIONS: DestinationOption[] = [
 export interface RequestDestinationFieldProps {
   label: string;
   ariaLabel: string;
+  size?: 48 | 60;
 }
 
-export const RequestDestinationField = ({ label, ariaLabel }: RequestDestinationFieldProps) => {
+export const RequestDestinationField = ({ label, ariaLabel, size = 48 }: RequestDestinationFieldProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [inputValue, setInputValue] = useState('');
@@ -67,6 +68,7 @@ export const RequestDestinationField = ({ label, ariaLabel }: RequestDestination
             <InputField
               className="request-forms__destination-input"
               label={label}
+              size={size}
               state="default"
               showIcon={false}
               value={displayValue}
