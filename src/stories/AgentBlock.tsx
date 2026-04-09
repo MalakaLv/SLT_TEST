@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
 
 import './agent-block.css';
@@ -29,12 +30,23 @@ export const AgentBlock = ({
   className,
   style,
 }: AgentBlockProps) => {
+  const [hasAvatarError, setHasAvatarError] = useState(false);
   const resolvedVariantClass = variant === 'auto' ? 'agent-block--390' : `agent-block--${variant}`;
+  const showFallback = hasAvatarError || avatarSrc.trim().length === 0;
 
   return (
     <div className={['agent-block', resolvedVariantClass, variant === 'auto' ? 'agent-block--auto' : '', className ?? ''].filter(Boolean).join(' ')} style={style}>
       <div className="agent-block__avatar-wrap">
-        <img className="agent-block__avatar" src={avatarSrc} alt={avatarAlt} />
+        {showFallback ? (
+          <div className="agent-block__avatar-fallback" aria-hidden="true" />
+        ) : (
+          <img
+            className="agent-block__avatar"
+            src={avatarSrc}
+            alt={avatarAlt}
+            onError={() => setHasAvatarError(true)}
+          />
+        )}
         <span className="agent-block__availability">{availabilityLabel}</span>
       </div>
 

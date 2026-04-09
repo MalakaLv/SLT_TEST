@@ -9,6 +9,10 @@ const meta = {
   component: Button,
   parameters: {
     layout: 'centered',
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Ir6cAfm2NJjVpdSR4tmbc4/-SLT_V3--UI-Kit?node-id=37-268030&t=b7m9j6mSF14QK2cE-4',
+    },
   },
   tags: ['autodocs'],
   argTypes: {

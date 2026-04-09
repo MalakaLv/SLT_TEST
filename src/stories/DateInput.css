@@ -1,0 +1,283 @@
+.date-input {
+  width: 179px;
+  max-width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+}
+
+.date-input__body {
+  position: relative;
+  width: 100%;
+  min-height: 60px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 8px 0 16px;
+  background: #ffffff;
+  border: 1px solid transparent;
+}
+
+.date-input__native-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.date-input__native-input:disabled {
+  cursor: not-allowed;
+}
+
+.date-input__text-container {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.date-input__label,
+.date-input__value,
+.date-input__error {
+  margin: 0;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date-input__label {
+  color: #767676;
+}
+
+.date-input__label--small {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.date-input__label--large {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.date-input__value {
+  margin-top: -4px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #272727;
+}
+
+.date-input__value--hidden {
+  opacity: 0;
+}
+
+.date-input__status {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-input__clear-btn {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.date-input__clear-btn--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.date-input__status-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.date-input__status-svg circle,
+.date-input__status-svg path {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.date-input__error {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #c80b0b;
+}
+
+.date-input--light.date-input--default .date-input__body,
+.date-input--light.date-input--split-left.date-input--default .date-input__body,
+.date-input--light.date-input--split-right.date-input--default .date-input__body {
+  border-color: #b7b7b7;
+}
+
+.date-input--dark.date-input--default .date-input__body,
+.date-input--dark.date-input--split-left.date-input--default .date-input__body,
+.date-input--dark.date-input--split-right.date-input--default .date-input__body {
+  border-color: transparent;
+}
+
+.date-input--split-left.date-input--light .date-input__body {
+  border-right-width: 0;
+}
+
+.date-input--split-right.date-input--light .date-input__body {
+  border-left-width: 0;
+}
+
+.date-input--hover .date-input__body {
+  background: #fffcf9;
+  border-color: #dbb685;
+}
+
+.date-input--focused.date-input--light .date-input__body {
+  border-color: #272727;
+  box-shadow: inset 0 0 0 1px #272727;
+}
+
+.date-input--focused.date-input--dark .date-input__body {
+  border-color: #dbb685;
+  box-shadow: inset 0 0 0 1px #dbb685;
+}
+
+.date-input--pressed.date-input--light .date-input__body {
+  border-color: #272727;
+  box-shadow: inset 0 0 0 1px #272727;
+}
+
+.date-input--pressed.date-input--dark .date-input__body {
+  border-color: #dbb685;
+  box-shadow: inset 0 0 0 1px #dbb685;
+}
+
+.date-input--error.date-input--light .date-input__body {
+  background: #ffe8e8;
+  border: 1px solid #c80b0b;
+  box-shadow: none;
+}
+
+.date-input--error.date-input--dark .date-input__body {
+  background: #ffe8e8;
+  border: 1px solid #ff7c7d;
+  box-shadow: inset 0 0 0 1px #ff7c7d;
+}
+
+.date-input--disabled.date-input--light .date-input__body {
+  background: #eeeeee;
+  border: 1px solid #d7d7d7;
+  box-shadow: none;
+}
+
+.date-input--disabled.date-input--dark .date-input__body {
+  background: #eeeeee;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.date-input--disabled .date-input__label,
+.date-input--disabled .date-input__value {
+  color: #d7d7d7;
+}
+
+.date-input--focused .date-input__status-svg circle,
+.date-input--focused .date-input__status-svg path,
+.date-input--pressed .date-input__status-svg circle,
+.date-input--pressed .date-input__status-svg path {
+  stroke: #a0a0a0;
+}
+
+.date-input--disabled .date-input__status-svg circle,
+.date-input--disabled .date-input__status-svg path {
+  stroke: #d7d7d7;
+}
+
+.date-input--error .date-input__error {
+  color: #c80b0b;
+}
+
+/* Keep the shared seam owned by the dedicated divider in two-field light mode. */
+.date-input--split-left.date-input--light .date-input__body {
+  border-right-width: 0;
+}
+
+.date-input--split-right.date-input--light .date-input__body {
+  border-left-width: 0;
+}
+
+.date-input-range {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.date-input-range__fields {
+  position: relative;
+  display: inline-flex;
+}
+
+.date-input-range__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-0.5px);
+  background: #b7b7b7;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.date-input-range--dark .date-input-range__divider {
+  background: #b7b7b7;
+}
+
+.date-input-range__fields:has(.date-input--hover) .date-input-range__divider {
+  background: #dbb685;
+}
+
+.date-input-range__fields:has(.date-input--focused.date-input--light) .date-input-range__divider {
+  background: #272727;
+}
+
+.date-input-range__fields:has(.date-input--focused.date-input--dark) .date-input-range__divider {
+  background: #dbb685;
+}
+
+.date-input-range__error {
+  margin: 0;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #c80b0b;
+}

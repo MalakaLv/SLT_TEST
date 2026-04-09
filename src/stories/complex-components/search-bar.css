@@ -55,8 +55,21 @@
 .search-bar .request-forms__destination-trigger-wrap,
 .search-bar .request-forms__destination-input,
 .search-bar .input-field,
+.search-bar .date-input-range,
 .search-bar .storybook-button {
   width: 100%;
+}
+
+.search-bar__cell--date-range .date-input-range__fields {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
+
+.search-bar__cell--date-range .date-input {
+  width: auto;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .search-bar__dropdown-button--text-only {
@@ -83,6 +96,28 @@
   align-self: stretch;
 }
 
+.search-bar__cell--date-range {
+  grid-column: span 2;
+  position: relative;
+}
+
+.search-bar__date-picker-popover {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 20;
+  max-width: none;
+  overflow: visible;
+  background: transparent;
+}
+
+.search-bar__date-picker-popover--portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
 .search-bar__cell--action .storybook-button {
   min-height: 60px;
 }
@@ -90,6 +125,10 @@
 @media (max-width: 1024px) {
   .search-bar__row--fields {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .search-bar__cell--date-range {
+    grid-column: span 1;
   }
 
   .search-bar__cell--action {
@@ -100,6 +139,15 @@
 @media (max-width: 720px) {
   .search-bar__row--fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search-bar__cell--date-range {
+    grid-column: 1 / -1;
+  }
+
+  .search-bar__cell--date-range > .search-bar__date-picker-popover {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -151,6 +199,11 @@
   }
 
   .search-bar--mobile-390 .search-bar__cell--action {
+    grid-column: 1 / -1;
+  }
+
+  .search-bar--mobile-320 .search-bar__cell--date-range,
+  .search-bar--mobile-390 .search-bar__cell--date-range {
     grid-column: 1 / -1;
   }
 }

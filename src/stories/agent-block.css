@@ -34,6 +34,13 @@
   object-fit: cover;
 }
 
+.agent-block__avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000000;
+}
+
 .agent-block__availability {
   position: absolute;
   left: 0;

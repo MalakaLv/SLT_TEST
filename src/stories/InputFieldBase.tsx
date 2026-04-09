@@ -1,7 +1,8 @@
-import type { CSSProperties, RefObject } from 'react';
+import { useRef, useState } from 'react';
+import type { CSSProperties, MouseEvent, RefObject } from 'react';
 import type { KeyboardEvent } from 'react';
 
-import { PlusIcon as SharedPlusIcon } from './icons/Icons';
+import { ClearIcon, PlusIcon as SharedPlusIcon } from './icons/Icons';
 import './InputFieldBase.css';
 
 export interface InputFieldBaseProps {
@@ -16,9 +17,12 @@ export interface InputFieldBaseProps {
   onInputBlur?: () => void;
   onInputChange?: (value: string) => void;
   onInputKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onInputClick?: () => void;
   inputDisabled?: boolean;
+  inputReadOnly?: boolean;
   inputRef?: RefObject<HTMLInputElement | null>;
   iconSize?: 16 | 20 | 24;
+  showClearControl?: boolean;
 }
 
 const PlusIcon = ({ tone, size }: { tone: 'active-empty' | 'default' | 'disabled'; size: 16 | 20 | 24 }) => (
@@ -37,7 +41,7 @@ const PlusIcon = ({ tone, size }: { tone: 'active-empty' | 'default' | 'disabled
 
 export const InputFieldBase = ({
   type = 'empty',
-  state = 'active',
+  state,
   label = 'Label',
   value = 'Input Text',
   showIcon = true,
@@ -47,30 +51,72 @@ export const InputFieldBase = ({
   onInputBlur,
   onInputChange,
   onInputKeyDown,
+  onInputClick,
   inputDisabled = false,
+  inputReadOnly = false,
   inputRef,
   iconSize = 24,
+  showClearControl = false,
 }: InputFieldBaseProps) => {
+  const localInputRef = useRef<HTMLInputElement | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [localValue, setLocalValue] = useState(type === 'empty' ? '' : value);
+
+  const visualState = state ?? 'active';
   const isEmpty = type === 'empty';
   const isSemiBold = type === 'semiBold';
-  const isDisabled = state === 'disabled';
-  const isAction = state === 'action';
-  const showValue = !isEmpty;
-  const labelSize = isEmpty && !isAction ? 'large' : 'small';
-  const displayValue = inputValue ?? (showValue ? value : '');
+  const isDisabled = visualState === 'disabled' || inputDisabled;
 
-  const iconTone = isDisabled ? 'disabled' : isEmpty && state === 'active' ? 'active-empty' : 'default';
+  const effectiveState: NonNullable<InputFieldBaseProps['state']> = isDisabled
+    ? 'disabled'
+    : isFocused
+      ? 'action'
+      : isHovered && visualState === 'active'
+        ? 'hover'
+        : visualState;
+
+  const isInputControlled = inputValue !== undefined;
+  const actualInputValue = isInputControlled ? inputValue : localValue;
+  const shouldRevealInput = !isEmpty || effectiveState === 'action' || actualInputValue.trim().length > 0;
+  const labelSize = isEmpty && !shouldRevealInput ? 'large' : 'small';
+  const displayValue = shouldRevealInput ? actualInputValue : '';
+  const showClear = showClearControl && !isDisabled && isFocused && actualInputValue.length > 0;
+
+  const iconTone = isDisabled ? 'disabled' : isEmpty && effectiveState === 'active' ? 'active-empty' : 'default';
+
+  const resolvedInputRef = inputRef ?? localInputRef;
+
+  const focusInput = (event: MouseEvent<HTMLDivElement>) => {
+    if (isDisabled) {
+      return;
+    }
+    event.preventDefault();
+    resolvedInputRef.current?.focus();
+  };
 
   return (
     <div
       className={[
         'input-field-base',
         `input-field-base--${type}`,
-        `input-field-base--${state}`,
+        `input-field-base--${effectiveState}`,
+        shouldRevealInput ? 'input-field-base--interactive' : '',
         className ?? '',
       ]
         .filter(Boolean)
         .join(' ')}
+      onMouseDown={focusInput}
+      onMouseEnter={() => {
+        if (!isDisabled) {
+          setIsHovered(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isDisabled) {
+          setIsHovered(false);
+        }
+      }}
     >
       {showIcon ? <PlusIcon tone={iconTone} size={iconSize} /> : null}
 
@@ -80,7 +126,7 @@ export const InputFieldBase = ({
         </span>
 
         <input
-          ref={inputRef}
+          ref={resolvedInputRef}
           type="text"
           className={[
             'input-field-base__native-input',
@@ -89,13 +135,53 @@ export const InputFieldBase = ({
             .filter(Boolean)
             .join(' ')}
           value={displayValue}
-          disabled={inputDisabled}
-          onFocus={onInputFocus}
-          onBlur={onInputBlur}
-          onChange={(e) => onInputChange?.(e.target.value)}
+          disabled={isDisabled}
+          readOnly={inputReadOnly}
+          onClick={() => onInputClick?.()}
+          onFocus={() => {
+            setIsFocused(true);
+            onInputFocus?.();
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+            onInputBlur?.();
+          }}
+          onChange={(e) => {
+            if (!isInputControlled) {
+              setLocalValue(e.target.value);
+            }
+            onInputChange?.(e.target.value);
+          }}
           onKeyDown={onInputKeyDown}
         />
       </div>
+
+      <span className="input-field-base__status" data-clear-condition={showClear ? 'true' : 'false'}>
+        <button
+          type="button"
+          className={['input-field-base__clear-btn', !showClear ? 'input-field-base__clear-btn--hidden' : '']
+            .filter(Boolean)
+            .join(' ')}
+          onMouseDown={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          }}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!isInputControlled) {
+              setLocalValue('');
+            }
+            onInputChange?.('');
+            resolvedInputRef.current?.focus();
+          }}
+          aria-label="Clear input"
+          aria-hidden={!showClear}
+          tabIndex={showClear ? 0 : -1}
+        >
+          <ClearIcon containerSize={iconSize} className="input-field-base__status-svg" />
+        </button>
+      </span>
     </div>
   );
 };

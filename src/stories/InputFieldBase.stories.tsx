@@ -23,6 +23,7 @@ const meta = {
     label: 'Label',
     value: 'Input Text',
     showIcon: true,
+    showClearControl: true,
   },
 } satisfies Meta<typeof InputFieldBase>;
 

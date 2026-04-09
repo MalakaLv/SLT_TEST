@@ -139,6 +139,7 @@ export const InputField = ({
           onInputKeyDown={onInputKeyDown}
           showIcon={showIcon}
           iconSize={iconSize}
+          showClearControl={false}
           className="input-field__base"
         />
 

@@ -94,8 +94,21 @@
 .request-forms .request-forms__destination-trigger-wrap,
 .request-forms .request-forms__destination-input,
 .request-forms .input-field,
+.request-forms .date-input-range,
 .request-forms .phone-input-field {
   width: 100%;
+}
+
+.request-forms__cell--date-range .date-input-range__fields {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
+
+.request-forms__cell--date-range .date-input {
+  width: auto;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .request-forms__dropdown-button--text-only {

@@ -1,6 +1,10 @@
+import { useState } from 'react';
+
 import { AgentBlock } from './AgentBlock';
 import { Button } from './Button';
 import { DropdownButton } from './complex-components/DropdownButton';
+import { DateInput } from './DateInput';
+import { getDateInputModeForFlightType, type FlightType } from './flightType';
 import { InputField } from './InputField';
 import { PhoneInputField } from './PhoneInputField';
 import { RequestDestinationField } from './RequestDestinationField';
@@ -33,6 +37,8 @@ export const RequestForms = ({
   submitLabel = 'Get A Free Quotes',
   agentBlockVariant = 'auto',
 }: RequestFormsProps) => {
+  const [flightType, setFlightType] = useState<FlightType>('round-trip');
+
   return (
     <div className={['request-forms-layout', className ?? ''].filter(Boolean).join(' ')}>
       <AgentBlock className="request-forms__agent-block" variant={agentBlockVariant} />
@@ -49,7 +55,8 @@ export const RequestForms = ({
             <DropdownButton
               variant="text-only"
               listType="standard"
-              defaultValue="round-trip"
+              value={flightType}
+              onChange={(nextValue) => setFlightType(nextValue as FlightType)}
               ariaLabel="Trip type"
               className="request-forms__dropdown-button request-forms__dropdown-button--text-only"
             />
@@ -74,11 +81,14 @@ export const RequestForms = ({
         </div>
 
         <div className="request-forms__row">
-          <div className="request-forms__cell">
-            <InputField label={departureDateLabel} size={60} state="default" showIcon={false} />
-          </div>
-          <div className="request-forms__cell">
-            <InputField label={returnDateLabel} size={60} state="default" showIcon={false} />
+          <div className="request-forms__cell request-forms__cell--date-range">
+            <DateInput
+              mode={getDateInputModeForFlightType(flightType)}
+              background="light"
+              departureLabel={departureDateLabel}
+              returnLabel={returnDateLabel}
+              singleLabel={departureDateLabel}
+            />
           </div>
         </div>
 
